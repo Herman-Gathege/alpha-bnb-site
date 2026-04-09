@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  color: var(--color-muted);
+}
+
+.Toastify {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  width: auto; /* or 100% if you like full-width */
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+}
+

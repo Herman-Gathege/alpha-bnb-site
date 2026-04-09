@@ -1,0 +1,115 @@
+/* ===== Hero Section ===== */
+
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.55)
+    ),
+    url("/hero-bg.jpg") center/cover no-repeat;
+  color: #fff;
+  padding: 2rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 800px;
+  text-align: center;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e5e7eb;
+  margin-bottom: 1rem;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.hero-content h1 span {
+  color: #facc15; /* accent */
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #e5e7eb;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background-color: #facc15;
+  color: #111827;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  background-color: #eab308;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  border: 1px solid #e5e7eb;
+  color: #fff;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #111827;
+  border-radius: 999px;
+  padding: 0.85rem 1.6rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  background-color: #eab308;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+}
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

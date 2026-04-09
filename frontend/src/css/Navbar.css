@@ -1,0 +1,214 @@
+/* frontend/src/css/Navbar.css */
+
+.navbar {
+  background-color: #fff; /* SureStep primary color */
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 24px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  justify-self: flex-start;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navbar-logo-img {
+  height: 42px;              /* fits nicely in 70px navbar */
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.navbar-logo-text {
+  margin-left: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #000;
+}
+
+
+.menu-icon {
+  display: none;
+  color: #000;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  text-align: center;
+}
+
+.nav-item {
+  height: 70px;
+}
+
+.nav-links {
+  color: #000;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+}
+
+.nav-links:hover {
+  color: #ffd166; /* Accent color */
+}
+
+.nav-cta {
+  background-color: #B10F3A;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.nav-cta:hover {
+  background-color: #f4c430;
+  color: #0d3b66;
+}
+
+/* Active nav link (scroll-based) */
+.nav-links.active {
+  color: #B10F3A;
+  font-weight: 600;
+  position: relative;
+}
+
+.nav-links.active::after {
+  content: "";
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 2px;
+  background-color: #B10F3A;
+  border-radius: 2px;
+}
+
+/* Prevent CTA from getting underline */
+.nav-links.nav-cta::after {
+  display: none;
+}
+
+/* Make nav buttons look like links */
+.nav-menu button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Ensure buttons behave like nav links */
+.nav-menu button.nav-links {
+  text-decoration: none;
+}
+/* Make nav buttons match nav link layout exactly */
+.nav-menu button.nav-links {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  height: 100%;
+}
+
+
+/* =========================
+   MOBILE NAVBAR FIX
+========================= */
+@media screen and (max-width: 768px) {
+  .menu-icon {
+    display: block;
+    z-index: 1001;
+  }
+
+  /* Drawer container */
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    width: 100%;
+    max-width: 320px;
+    height: calc(100vh - 70px);
+    background-color: #ffffff;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.5rem 1.25rem;
+    gap: 0.25rem;
+
+    transition: right 0.35s ease;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-item {
+    height: auto;
+  }
+
+  /* Reset desktop link styles */
+  .nav-links,
+  .nav-menu button.nav-links {
+    height: auto;
+    padding: 0.9rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    justify-content: flex-start;
+  }
+
+  .nav-links:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  /* Active indicator */
+  .nav-links.active {
+    background-color: rgba(177, 15, 58, 0.08);
+  }
+
+  .nav-links.active::after {
+    display: none;
+  }
+
+  /* CTA button */
+  .nav-cta {
+    margin-top: 1rem;
+    margin-left: 0;
+    text-align: center;
+    justify-content: center;
+    padding: 0.85rem;
+    font-size: 0.95rem;
+  }
+}

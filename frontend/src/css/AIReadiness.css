@@ -1,0 +1,159 @@
+/* AI Readiness Page */
+
+.page-container {
+  padding: 80px 20px;
+  font-family: "Inter", sans-serif;
+}
+
+.ai-card {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 48px 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Typography */
+
+.ai-card h1 {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.ai-card h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.ai-card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.ai-card p {
+  font-size: 16px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+
+.ai-btn {
+  display: inline-block;
+  padding: 14px 26px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ai-btn-primary {
+  background-color: #B10F3A;
+  color: #ffffff;
+}
+
+.ai-btn-primary:hover {
+  background-color: #f4c430;
+  color: #000000;
+}
+
+.ai-btn-outline {
+  background: #ffffff;
+  border: 2px solid #0a2540;
+  color: #0a2540;
+}
+
+.ai-btn-outline:hover {
+  background-color: #0a2540;
+  color: #ffffff;
+}
+
+/* Form */
+
+.ai-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ai-form input {
+  padding: 14px 16px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+
+.ai-form input:focus {
+  outline: none;
+  border-color: #0a2540;
+}
+
+/* Question */
+
+.ai-progress {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.ai-answer-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* Result */
+
+.ai-score {
+  font-size: 48px;
+  font-weight: 700;
+  color: #0a2540;
+  margin: 20px 0;
+}
+
+.ai-status {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.ai-cta {
+  margin-top: 24px;
+}
+
+.ai-cta a {
+  font-weight: 600;
+  color: #0a2540;
+  text-decoration: underline;
+}
+
+/* Loading */
+
+.ai-loading {
+  text-align: center;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+/* Mobile */
+
+@media (max-width: 640px) {
+  .ai-card {
+    padding: 32px 24px;
+  }
+
+  .ai-card h1 {
+    font-size: 28px;
+  }
+
+  .ai-score {
+    font-size: 40px;
+  }
+}

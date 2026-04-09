@@ -1,0 +1,11 @@
+:root {
+  --color-primary: #1e3a8a;
+  --color-accent: #facc15;
+
+  --color-bg: #f9fafb;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}

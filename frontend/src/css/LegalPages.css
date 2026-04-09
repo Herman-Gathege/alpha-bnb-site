@@ -1,0 +1,78 @@
+/* Page wrapper */
+.legal-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  color: #111111;
+}
+
+/* Main content area */
+.legal-container {
+  flex: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 2.5rem; /* 🔽 reduced top padding */
+}
+
+/* Main heading */
+.legal-container h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem; /* 🔽 tighter */
+  color: #111111;
+  position: relative;
+}
+
+/* Red accent underline (stronger presence) */
+.legal-container h1::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 3px;
+  background-color: #B10F3A;
+  margin-top: 0.5rem;
+}
+
+/* Section headings */
+.legal-container h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;      /* 🔽 reduced */
+  margin-bottom: 0.5rem;
+  color: #B10F3A;        /* 🔴 brand red */
+  font-weight: 600;
+}
+
+/* Body text */
+.legal-container p {
+  font-size: 1.02rem;
+  line-height: 1.65;     /* 🔽 tighter */
+  margin-bottom: 1rem;
+  color: #333333;
+}
+
+/* Lists */
+.legal-container ul {
+  padding-left: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.legal-container li {
+  margin-bottom: 0.4rem;
+  line-height: 1.55;
+}
+
+/* Links */
+.legal-container a {
+  color: #B10F3A;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.legal-container a:hover {
+  text-decoration: underline;
+}
+
+/* Footer stays at bottom */
+.footer {
+  margin-top: auto;
+}
