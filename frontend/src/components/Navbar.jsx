@@ -55,11 +55,12 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" className="navbar-logo">
           <img
-            src="/images/surestep-logo.jpg"
-            alt="SureStep Business Advisors"
+            src="/images/logo.jpeg"
+            alt="MySpaceByAlphaOne"
             className="navbar-logo-img"
+            onClick={() => goToSection("home")}
           />
-          <span className="navbar-logo-text">SureStep Business Advisors</span>
+          <span className="navbar-logo-text">MySpaceByAlphaOne</span>
         </Link>
 
         {/* Mobile menu */}
@@ -129,7 +130,7 @@ const Navbar = () => {
               className="nav-links nav-cta"
               onClick={() => setIsOpen(false)}
             >
-              Free AI Readiness Score
+              Book a stay Today
             </Link>
           </li>
         </ul>

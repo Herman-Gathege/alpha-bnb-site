@@ -31,7 +31,7 @@ const Contact = () => {
     <>
       <Navbar />
       <div className="contact-page page-container">
-        <h1>Contact SureStep Business</h1>
+        <h1>Contact Us</h1>
         <p>Send us a message and we’ll get back to you shortly.</p>
 
         <form onSubmit={handleSubmit} className="contact-form">

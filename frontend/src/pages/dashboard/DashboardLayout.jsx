@@ -1,16 +1,17 @@
 // frontend/src/pages/dashboard/DashboardLayout.jsx
 
 import React from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, Link } from "react-router-dom";
 import TopBar from "../../components/dashboard/TopBar";
-
 
 const DashboardLayout = () => {
   return (
     <div style={styles.wrapper}>
       {/* Sidebar */}
       <aside style={styles.sidebar}>
-        <h2 style={styles.logo}>SureStep</h2>
+        <Link to="/" style={{ textDecoration: "none" , color: "inherit" }}>
+          <h2 style={styles.logo}>SureStep</h2>
+        </Link>
 
         <nav style={styles.nav}>
           <NavLink
@@ -50,7 +51,6 @@ const DashboardLayout = () => {
             Contact Messages
           </NavLink>
         </nav>
-
       </aside>
 
       {/* Main Area */}
@@ -95,7 +95,7 @@ const styles = {
     fontSize: "14px",
     padding: "8px 10px",
     borderRadius: "6px",
-  },  
+  },
   main: {
     flex: 1,
     display: "flex",

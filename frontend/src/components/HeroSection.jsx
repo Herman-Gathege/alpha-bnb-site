@@ -14,26 +14,23 @@ const HeroSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
-        <span className="hero-eyebrow">
-          Business Growth • Compliance • Strategy
-        </span>
+        <span className="hero-eyebrow">Luxury • Comfort • Reliable Stays</span>
 
         <h1>
-          Helping Businesses Take <span>the Right Next Step</span>
+          Find Your Perfect <span>Stay in Kenya</span>
         </h1>
 
         <p>
-          SureStep Business supports entrepreneurs and growing companies with
-          practical guidance, compliance support, and strategies that bring
-          clarity, confidence, and sustainable growth.
+          Modern, fully serviced apartments designed for comfort, security, and
+          convenience whether you're traveling for work or leisure.
         </p>
 
         <div className="hero-actions">
           <Link to="/contact" className="btn-primary">
-            Book a Consultation
+            Check Availability
           </Link>
           <Link to="/services" className="btn-secondary">
-            Explore Services
+            Explore Apartments
           </Link>
         </div>
       </motion.div>

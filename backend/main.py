@@ -2,12 +2,15 @@
 from flask import Flask
 from extensions import db, bcrypt, jwt, migrate
 from config import get_config
+from commands import create_admin
 import modules.core.models
 from flask_cors import CORS
+
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(get_config())
+    app.cli.add_command(create_admin)
 
     # Enable CORS
     # CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)

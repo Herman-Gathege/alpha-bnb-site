@@ -1,31 +1,31 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaBriefcase, FaShieldAlt, FaUsers } from "react-icons/fa";
+import { FaWifi, FaParking, FaKey } from "react-icons/fa";
 import "../css/landing.css";
 
 const ServicesSection = () => {
   const services = [
     {
-      icon: <FaBriefcase />,
-      title: "Business Advisory",
-      desc: "Practical guidance to help you make informed decisions and grow sustainably.",
+      icon: <FaKey />,
+      title: "Self Check-In",
+      desc: "Enjoy flexible arrival with secure lockbox access so you can check in at your convenience.",
     },
     {
-      icon: <FaShieldAlt />,
-      title: "Compliance & Registration",
-      desc: "We help you stay compliant with regulations and handle business registrations.",
+      icon: <FaWifi />,
+      title: "Fast Wi-Fi & Workspace",
+      desc: "Reliable high-speed internet and a dedicated workspace perfect for remote work and business travel.",
     },
     {
-      icon: <FaUsers />,
-      title: "Operational Support",
-      desc: "Streamline processes, improve efficiency, and strengthen your operations.",
+      icon: <FaParking />,
+      title: "Secure Free Parking",
+      desc: "Gated parking with 24-hour security for peace of mind throughout your stay.",
     },
   ];
 
   return (
     <section id="services" className="features">
-      <h2>What We Do</h2>
-  
+      <h2>What Guests Love</h2>
+
       <div className="feature-grid">
         {services.map((item, idx) => (
           <motion.div
@@ -43,7 +43,7 @@ const ServicesSection = () => {
         ))}
       </div>
     </section>
-  );  
+  );
 };
 
 export default ServicesSection;

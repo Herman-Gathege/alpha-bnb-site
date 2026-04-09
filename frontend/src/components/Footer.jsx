@@ -7,30 +7,38 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-top">
         <div className="footer-brand">
-          <h2>SureStep Business Advisors</h2>
+          <h2>MySpaceByAlphaOne</h2>
           <p>
-            Helping 7 - 8 figure service companies simplify{" "}
-            <Link to="/dashboard" className="footer-inline-link">
-              operations
+            Providing modern, safe, and fully serviced apartments across Kenya.
+            Book, stay, and enjoy hassle-free hospitality with
+            <Link to="/listings" className="footer-inline-link">
+              our properties
             </Link>
-            , integrate AI systems, and scale without chaos.
+            .
           </p>
-
         </div>
 
         <div className="footer-links">
           <h3>Services</h3>
           <ul>
-            <li><Link to="/ai-readiness">AI Readiness Review</Link></li>
-            <li><Link to="/services">Automation & System Design</Link></li>
-            <li><Link to="/services#team-training">Team Training</Link></li>
-            <li><Link to="/services">Knowledge Hub AI</Link></li>
+            <li>
+              <Link to="/ai-readiness">AI Readiness Review</Link>
+            </li>
+            <li>
+              <Link to="/services">Automation & System Design</Link>
+            </li>
+            <li>
+              <Link to="/services#team-training">Team Training</Link>
+            </li>
+            <li>
+              <Link to="/services">Knowledge Hub AI</Link>
+            </li>
           </ul>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>© 2025 SureStep Business Advisors. All rights reserved.</p>
+        <p>© 2026 MySpaceByAlphaOne. All rights reserved.</p>
         <div className="footer-policy">
           <Link to="/privacy-policy">Privacy Policy</Link>
           <span>|</span>
