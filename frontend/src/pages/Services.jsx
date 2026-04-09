@@ -1,145 +1,85 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import "../css/Services.css";
+import "../css/Listings.css";
 
-const Services = () => {
+const listings = [
+  {
+    id: 1,
+    title: "Featured Bungoma Apartment",
+    location: "Bungoma, Kenya",
+    rating: 4.85,
+    reviews: 13,
+    image: "/images/hero11.jpeg",
+    desc: "Modern, secure, and comfortable serviced apartment. Perfect for a peaceful stay with full amenities and reliable internet.",
+    price: "KES 12,000 / night",
+    link: "/listing/1",
+    featured: true,
+  },
+  // Future listings can be added here
+  // {
+  //   id: 2,
+  //   title: "Cozy Nairobi Studio",
+  //   ...
+  // },
+];
+
+const Listings = () => {
   return (
     <>
       <Navbar />
 
       {/* ================= HERO ================= */}
-      <section className="services-hero">
-        <div className="services-hero-content">
-          <h1>Our Services</h1>
-          <p>
-            We help established service businesses eliminate owner dependency,
-            streamline operations, and scale with confidence using practical AI
-            and automation.
-          </p>
+      <section className="listings-hero">
+        <div className="listings-hero-content">
+          <h1>Our Listings</h1>
+          <p className="listings-intro">Discover our curated selection of premium serviced apartments.</p>
         </div>
       </section>
 
-      {/* ================= CORE SERVICES ================= */}
-      <section className="services-core">
-        <div className="services-grid">
-          <div className="service-card">
-            <h3>Operations & Process Optimization</h3>
-            <p>
-              We document how your business actually runs, identify operational
-              gaps, and design systems that remove daily friction.
-            </p>
-            <ul>
-              <li>Process documentation & SOPs</li>
-              <li>Workflow mapping</li>
-              <li>Operational gap analysis</li>
-            </ul>
-          </div>
-
-          <div className="service-card">
-            <h3>Automation & AI System Design</h3>
-            <p>
-              We build reliable automations that handle repetitive tasks so your
-              team can focus on revenue-generating work.
-            </p>
-            <ul>
-              <li>Automated follow-ups & scheduling</li>
-              <li>Admin & data entry automation</li>
-              <li>Tool integration with existing systems</li>
-            </ul>
-          </div>
-
-          <div className="service-card">
-            <h3>Team Training & Adoption</h3>
-            <p>
-              Systems only work when people use them. We train your team to adopt
-              new tools confidently and consistently.
-            </p>
-            <ul>
-              <li>Live team training sessions</li>
-              <li>Step-by-step documentation</li>
-              <li>On-demand video guides</li>
-            </ul>
-          </div>
-
-          <div className="service-card">
-            <h3>Knowledge Hub AI</h3>
-            <p>
-              We centralize your company knowledge into a private AI-powered hub
-              that keeps operations running even when key people are out.
-            </p>
-            <ul>
-              <li>Searchable workflows & SOPs</li>
-              <li>Internal AI knowledge assistant</li>
-              <li>Faster decision-making</li>
-            </ul>
-          </div>
-        </div>
+      {/* ================= FEATURED LISTING ================= */}
+      <section className="featured-listing">
+        {listings
+          .filter((l) => l.featured)
+          .map((listing) => (
+            <div key={listing.id} className="listing-card featured">
+              <img src={listing.image} alt={listing.title} />
+              <div className="listing-info">
+                <h2>{listing.title}</h2>
+                <p className="listing-location">{listing.location}</p>
+                <p className="listing-desc">{listing.desc}</p>
+                <p className="listing-rating">
+                  ⭐ {listing.rating} ({listing.reviews} reviews)
+                </p>
+                <p className="listing-price">{listing.price}</p>
+                <a href={listing.link} className="btn-primary">
+                  Book Now
+                </a>
+              </div>
+            </div>
+          ))}
       </section>
 
-      {/* ================= FRAMEWORK ================= */}
-      <section className="services-framework">
-        <h2>The SureStep Smooth Operations Plan</h2>
-        <p className="framework-intro">
-          Our four-step done-for-you framework helps your business shift from
-          chaos to clarity. Start at any step, or complete all four for a fully
-          optimized operation.
-        </p>
-
-        <div className="framework-steps">
-          <div className="framework-card">
-            <span>Step 1</span>
-            <h3>Operations & AI Recommendations Review</h3>
-            <p>
-              We map your entire business—people, tools, and processes—and
-              deliver a clear blueprint for turning it into an AI-powered
-              operation.
-            </p>
-            <strong>$5,000</strong>
-          </div>
-
-          <div className="framework-card">
-            <span>Step 2</span>
-            <h3>BUILD – Automate the Grind</h3>
-            <p>
-              We build and launch automations that remove repetitive tasks and
-              free your team to focus on growth.
-            </p>
-            <strong>Starting at $7,500</strong>
-          </div>
-
-          <div className="framework-card">
-            <span>Step 3</span>
-            <h3>TRAIN – Make It Stick</h3>
-            <p>
-              We train your team through hands-on sessions, documentation, and
-              follow-ups to ensure full adoption.
-            </p>
-            <strong>Starting at $3,500</strong>
-          </div>
-
-          <div className="framework-card">
-            <span>Step 4</span>
-            <h3>SYSTEMIZE – Self-Running Business</h3>
-            <p>
-              We centralize your knowledge into an AI-powered hub so operations
-              run smoothly without constant oversight.
-            </p>
-            <strong>Starting at $15,000</strong>
-          </div>
+      {/* ================= OTHER LISTINGS ================= */}
+      <section className="other-listings">
+        <h2>More Listings</h2>
+        <div className="listings-grid">
+          {listings
+            .filter((l) => !l.featured)
+            .map((listing) => (
+              <div key={listing.id} className="listing-card">
+                <img src={listing.image} alt={listing.title} />
+                <div className="listing-info">
+                  <h3>{listing.title}</h3>
+                  <p className="listing-location">{listing.location}</p>
+                  <p className="listing-price">{listing.price}</p>
+                  <a href={listing.link} className="btn-primary">
+                    Book Now
+                  </a>
+                </div>
+              </div>
+            ))}
         </div>
-      </section>
-
-      {/* ================= CTA ================= */}
-      <section className="services-cta">
-        <h2>Ready to Get Your Time Back?</h2>
-        <p>
-          Start with a free 30-minute strategy call. We’ll show you exactly where
-          your operations can be streamlined.
-        </p>
-        <a href="/contact" className="btn-primary">
-          Book Your Free Strategy Call
-        </a>
       </section>
 
       <Footer />
@@ -147,4 +87,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Listings;
