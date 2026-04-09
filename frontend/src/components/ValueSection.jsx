@@ -48,7 +48,7 @@ const ValueSection = () => {
   ];
 
   return (
-    <section className="modules">
+    <section className="modules" id="featured">
       <h2>Featured Apartment - Bungoma's (AlphaOne)</h2>
 
       <div className="carousel">

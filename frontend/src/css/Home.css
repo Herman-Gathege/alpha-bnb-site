@@ -1,6 +1,6 @@
 /* ===== Hero Section ===== */
 
-.hero {
+/* .hero {
   position: relative;
   min-height: 90vh;
   display: flex;
@@ -10,10 +10,10 @@
       rgba(0, 0, 0, 0.55),
       rgba(0, 0, 0, 0.55)
     ),
-    url("/hero-bg.jpg") center/cover no-repeat;
+    url("/hero11.jpeg") center/cover no-repeat;
   color: #fff;
   padding: 2rem;
-}
+} */
 
 .hero-overlay {
   position: absolute;

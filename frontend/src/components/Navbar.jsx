@@ -80,6 +80,33 @@ const Navbar = () => {
           </li>
 
           <li className="nav-item">
+            <button
+              className={navLinkClass("featured")}
+              onClick={() => goToSection("featured")}
+            >
+              Featured BnB
+            </button>
+          </li>  
+
+          <li className="nav-item">
+            <button
+              className={navLinkClass("reviews")}
+              onClick={() => goToSection("reviews")}
+            >
+              Reviews
+            </button>
+          </li>        
+
+          <li className="nav-item">
+            <button
+              className={navLinkClass("about")}
+              onClick={() => goToSection("about")}
+            >
+              Meet the Host
+            </button>
+          </li>
+
+          <li className="nav-item">
             <Link
               to="/services"
               className={`nav-links ${
@@ -87,20 +114,11 @@ const Navbar = () => {
               }`}
               onClick={() => setIsOpen(false)}
             >
-              Services
+              listings
             </Link>
           </li>
 
-          <li className="nav-item">
-            <button
-              className={navLinkClass("about")}
-              onClick={() => goToSection("about")}
-            >
-              About
-            </button>
-          </li>
-
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link
               to="/events"
               className={`nav-links ${
@@ -110,7 +128,7 @@ const Navbar = () => {
             >
               Events
             </Link>
-          </li>
+          </li> */}
 
           <li className="nav-item">
             <Link

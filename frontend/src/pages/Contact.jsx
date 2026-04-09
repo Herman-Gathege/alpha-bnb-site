@@ -59,7 +59,7 @@ const Contact = () => {
             rows="5"
             required
           />
-          <button type="submit" className="btn-primary">
+          <button type="submit" className="contact-form nav-cta">
             Send Message
           </button>
         </form>
