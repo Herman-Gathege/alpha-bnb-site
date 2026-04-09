@@ -1,8 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../css/Footer.css"; // we'll style it separately
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import "../css/Footer.css";
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Smooth scroll when hash changes
+  useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
+  // Navigate and scroll to a section
+  const scrollToSection = (id) => {
+    if (location.pathname !== "/") {
+      navigate(`/#${id}`);
+    } else {
+      const el = document.getElementById(id);
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <footer className="footer">
       <div className="footer-top">
@@ -10,28 +33,39 @@ const Footer = () => {
           <h2>MySpaceByAlphaOne</h2>
           <p>
             Providing modern, safe, and fully serviced apartments across Kenya.
-            Book, stay, and enjoy hassle-free hospitality with
-            <Link to="/listings" className="footer-inline-link">
-              our properties
+            Book, stay, and enjoy hassle-free hospitality with our{" "}
+            <Link to="/login" className="footer-inline-link">
+              properties
             </Link>
             .
           </p>
         </div>
 
         <div className="footer-links">
-          <h3>Services</h3>
+          <h3>Explore</h3>
           <ul>
             <li>
-              <Link to="/ai-readiness">AI Readiness Review</Link>
+              <button onClick={() => scrollToSection("home")}>Home</button>
             </li>
             <li>
-              <Link to="/services">Automation & System Design</Link>
+              <button onClick={() => scrollToSection("featured")}>
+                Featured BnB
+              </button>
             </li>
             <li>
-              <Link to="/services#team-training">Team Training</Link>
+              <button onClick={() => scrollToSection("reviews")}>Reviews</button>
             </li>
             <li>
-              <Link to="/services">Knowledge Hub AI</Link>
+              <button onClick={() => scrollToSection("about")}>Meet the Host</button>
+            </li>
+            <li>
+              <Link to="/services">Listings</Link>
+            </li>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link to="/ai-readiness">Book a stay Today</Link>
             </li>
           </ul>
         </div>

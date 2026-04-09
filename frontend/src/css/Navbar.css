@@ -82,8 +82,9 @@
 .nav-cta {
   background-color: #B10F3A;
   color: #fff;
+  font-weight: 600;
   padding: 8px 16px;
-  border-radius: 4px;
+  border-radius: 0px 0px 4px 4px;
   margin-left: 8px;
 }
 

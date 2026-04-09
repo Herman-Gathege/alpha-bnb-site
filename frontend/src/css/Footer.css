@@ -29,6 +29,20 @@
   max-width: 400px;
 }
 
+.footer-links button{
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+}
+
+.footer-links button:hover {
+  text-decoration: underline;
+}
+
 .footer-links h3 {
   margin-bottom: 0.5rem;
 }
@@ -59,6 +73,7 @@
   color: #fff;
   text-decoration: underline;
   font-weight: 500;
+  padding-left: 4px;
 }
 
 .footer-inline-link:hover {
@@ -69,3 +84,4 @@
 .footer * {
   color: #fff;
 }
+
