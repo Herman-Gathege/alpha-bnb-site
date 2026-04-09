@@ -36,3 +36,11 @@
   width: fit-content;
   align-self: flex-start;
 }
+
+.contact-form .nav-cta {
+  background-color: #B10F3A;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-left: 8px;
+}

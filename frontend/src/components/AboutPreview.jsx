@@ -1,3 +1,6 @@
+import React from "react";
+import { Link } from "react-router-dom";
+
 const AboutPreview = () => {
   return (
     <section id="about" className="about-preview">
@@ -5,34 +8,43 @@ const AboutPreview = () => {
       <div className="about-section founder">
         <div className="founder-grid">
           <img
-            src="/images/colette-kemp.jpg"
-            alt="Colette Kemp, Founder of SureStep Business Advisors"
+            src="/images/eric.jpeg"
+            alt="Eric Sirali, Your Host"
             className="founder-image"
           />
 
           <div>
-            <h2 className="section-eyebrow">Meet Our Founder</h2>
-            <h3 className="founder-name">Colette Kemp</h3>
+            <h2 className="section-eyebrow">Meet Your Host</h2>
+            <h3 className="founder-name">Eric Sirali</h3>
             <p className="founder-title">
-              Founder of SureStep Business Advisors
+              Superhost · 4 years hosting · 100% response rate
             </p>
 
             <blockquote>
-              “When I ran my own skilled-trade business, the only way to grow was
-              to replace paper checklists and manual tasks with cloud-based
-              systems that kept the team aligned wherever they were.”
+              Providing modern, secure and comfortable serviced apartments
+              designed to give guests a reliable and peaceful stay.
             </blockquote>
 
-            <p>
-              Since then, I've grown into a consulting role where I've been
-              helping owners value and sell their businesses.
-            </p>
+            <p>Speaks: English & Swahili</p>
 
             <p>
-              By building digital assets and scalable systems now, you're
-              creating a business that's truly sellable when you're ready to
-              step back.
+              Eric is an experienced entrepreneur and property host with over a
+              decade of experience in building and scaling service-focused
+              businesses. He has successfully applied technology to streamline
+              operations, improve efficiency, and deliver top-tier experiences
+              to guests. Recognized as an early adopter of digital solutions in
+              traditional industries, Eric has been featured in Startup Nation
+              and as a VIP Speaker at the AI Business Jumpstart Summit. He
+              specializes in creating operational systems that ensure smooth,
+              consistent guest experiences while maintaining high standards of
+              safety, comfort, and reliability.
             </p>
+
+            <div className="hero-actions">
+              <Link to="/contact" className="btn-primary">
+                Message Eric
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -41,10 +53,18 @@ const AboutPreview = () => {
       <div className="about-section">
         <h4 className="section-heading">Proven Track Record</h4>
         <ul>
-          <li>Grew a service business nationally by shifting operations into the cloud</li>
-          <li>Early adopter of technology in traditional, blue-collar industries</li>
-          <li>Featured in Startup Nation & VIP Speaker at AI Business Jumpstart Summit</li>
-          <li>Specialist in operational systemization and team adoption</li>
+          <li>
+            Built and scaled service businesses nationally, integrating modern
+            operational systems.
+          </li>
+          <li>
+            Early adopter of digital technology to enhance service delivery.
+          </li>
+          <li>Featured in Startup Nation and AI Business Jumpstart Summit.</li>
+          <li>
+            Expert in operational systemization, guest experience, and team
+            adoption.
+          </li>
         </ul>
       </div>
 
@@ -52,9 +72,8 @@ const AboutPreview = () => {
       <div className="about-section mission">
         <h4 className="section-heading">Our Mission</h4>
         <p>
-          To help owners of growing and established service companies build
-          reliable systems that make their businesses efficient, profitable,
-          less owner-dependent, and more valuable.
+          To provide guests with modern, safe, and seamless stays while
+          maintaining a reliable, fully-serviced apartment experience.
         </p>
       </div>
 
@@ -62,22 +81,26 @@ const AboutPreview = () => {
       <div className="about-section contact">
         <h4 className="section-heading">Get in Touch</h4>
         <div className="contact-grid">
-          <div>
+          {/* <div>
             <span>Email</span>
             <a href="mailto:Colette@surestepbusiness.com">
               Colette@surestepbusiness.com
             </a>
-          </div>
+          </div> */}
 
           <div>
             <span>Phone</span>
-            <a href="tel:18049208897">(804) 920-8897</a>
+            <a href="tel:+254-777-735-509">(+254) 777-735-509</a>
           </div>
 
           <div>
             <span>LinkedIn</span>
-            <a href="https://www.linkedin.com/in/colettekemp/" target="_blank" rel="noreferrer">
-              Connect with Colette
+            <a
+              href="https://ke.linkedin.com/in/erick-sirali-85009712"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Connect with Eric
             </a>
           </div>
         </div>
