@@ -15,7 +15,8 @@ import TermsOfService from "./pages/TermsOfService";
 
 /* Dashboard */
 import DashboardLayout from "./pages/dashboard/DashboardLayout";
-import DashboardHome from "./pages/dashboard/DashboardHome";
+// import DashboardHome from "./pages/dashboard/DashboardHome";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import DashboardLeads from "./pages/dashboard/DashboardLeads";
 import DashboardAIReadiness from "./pages/dashboard/DashboardAIReadiness";
 import DashboardMessages from "./pages/dashboard/DashboardMessages";
@@ -51,7 +52,7 @@ function App() {
             </PrivateRoute>
           }
         >
-          <Route index element={<DashboardHome />} />
+          <Route index element={<AdminDashboard />} />
           <Route path="leads" element={<DashboardLeads />} />
           <Route path="ai-readiness" element={<DashboardAIReadiness />} />
           <Route path="contacts" element={<DashboardMessages />} />

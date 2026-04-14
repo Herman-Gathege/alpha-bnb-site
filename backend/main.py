@@ -51,7 +51,7 @@ def create_app(config_name=None):
     app.register_blueprint(portfolio_bp, url_prefix="/api/portfolio")
     app.register_blueprint(notifications_bp, url_prefix="/api/notifications")
     app.register_blueprint(ai_bp, url_prefix="/api/ai-readiness")
-    app.register_blueprint(admin_bp)
+    app.register_blueprint(admin_bp, url_prefix="/api/admin")
 
     @app.route("/")
     def index():
