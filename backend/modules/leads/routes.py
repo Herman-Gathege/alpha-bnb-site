@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from extensions import db
+from backend.extensions import db
 from .models import Lead
 
 leads_bp = Blueprint("leads", __name__, url_prefix="/leads")

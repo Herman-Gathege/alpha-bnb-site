@@ -1,7 +1,7 @@
 # backend/modules/contact/routes.py
 from flask import Blueprint, request, jsonify
-from extensions import db
-from modules.leads.models import Lead
+from backend.extensions import db
+from backend.modules.leads.models import Lead
 from .models import ContactMessage
 
 

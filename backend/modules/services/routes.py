@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from .models import Service
-from extensions import db
+from backend.extensions import db
 
 services_bp = Blueprint("services", __name__)
 
