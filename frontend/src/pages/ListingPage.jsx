@@ -94,9 +94,9 @@ const Listings = () => {
       {/* ================= HERO ================= */}
       <section className="listings-hero">
         <div className="listings-hero-content">
-          <h1>Our Listings</h1>
+          <h1>MySpace by Alpha One</h1>
           <p className="listings-intro">
-            Discover premium serviced apartments across Kenya.
+            Welcome to the Home of Perfect Stays
           </p>
         </div>
       </section>

@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "../css/Navbar.css";
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -12,7 +13,6 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // 🔹 Scroll / navigate to section safely
   const goToSection = (id) => {
     setIsOpen(false);
 
@@ -23,7 +23,6 @@ const Navbar = () => {
     }
   };
 
-  // 🔹 Highlight sections on landing page
   useEffect(() => {
     if (location.pathname !== "/") return;
 
@@ -37,7 +36,7 @@ const Navbar = () => {
           }
         });
       },
-      { threshold: 0.6 }
+      { threshold: 0.6 },
     );
 
     sections.forEach((section) => observer.observe(section));
@@ -52,7 +51,6 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Logo */}
         <Link to="/" className="navbar-logo">
           <img
             src="/images/logo.jpeg"
@@ -63,12 +61,10 @@ const Navbar = () => {
           <span className="navbar-logo-text">MySpaceByAlphaOne</span>
         </Link>
 
-        {/* Mobile menu */}
-        <div className="menu-icon" onClick={toggleMenu}>
+        <div className="menu-icon" style={{marginTop: "20px"}} onClick={toggleMenu}>
           {isOpen ? <FaTimes /> : <FaBars />}
         </div>
 
-        {/* Nav links */}
         <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
           <li className="nav-item">
             <button
@@ -86,7 +82,7 @@ const Navbar = () => {
             >
               Featured BnB
             </button>
-          </li>  
+          </li>
 
           <li className="nav-item">
             <button
@@ -95,7 +91,7 @@ const Navbar = () => {
             >
               Reviews
             </button>
-          </li>        
+          </li>
 
           <li className="nav-item">
             <button
@@ -109,34 +105,20 @@ const Navbar = () => {
           <li className="nav-item">
             <Link
               to="/listings"
-              className={`nav-links ${
-                isActiveRoute("/listings") ? "active" : ""
-              }`}
+              className={`nav-links ${isActiveRoute("/listings") ? "active" : ""}`}
               onClick={() => setIsOpen(false)}
+              style={{ textDecoration: "none" }}
             >
-              listings
+              Listings
             </Link>
           </li>
-
-          {/* <li className="nav-item">
-            <Link
-              to="/events"
-              className={`nav-links ${
-                isActiveRoute("/events") ? "active" : ""
-              }`}
-              onClick={() => setIsOpen(false)}
-            >
-              Events
-            </Link>
-          </li> */}
 
           <li className="nav-item">
             <Link
               to="/contact"
-              className={`nav-links ${
-                isActiveRoute("/contact") ? "active" : ""
-              }`}
+              className={`nav-links ${isActiveRoute("/contact") ? "active" : ""}`}
               onClick={() => setIsOpen(false)}
+              style={{ textDecoration: "none" }}
             >
               Contact
             </Link>
@@ -147,6 +129,7 @@ const Navbar = () => {
               to="/ai-readiness"
               className="nav-links nav-cta"
               onClick={() => setIsOpen(false)}
+              style={{ textDecoration: "none" }}
             >
               Book a stay Today
             </Link>

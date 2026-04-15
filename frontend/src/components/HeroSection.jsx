@@ -29,7 +29,7 @@ const HeroSection = () => {
           <Link to="/contact" className="btn-primary">
             Check Availability
           </Link>
-          <Link to="/services" className="btn-secondary">
+          <Link to="/listings" className="btn-secondary">
             Explore Apartments
           </Link>
         </div>
