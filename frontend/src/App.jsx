@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 /* Public pages */
 import Home from "./pages/Home";
-import Services from "./pages/Services";
+import ListingPage from "./pages/ListingPage";
 import About from "./pages/About";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
@@ -33,7 +33,7 @@ function App() {
       <Routes>
         {/* 🌍 Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
+        <Route path="/listings" element={<ListingPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/events" element={<Events />} />
         <Route path="/contact" element={<Contact />} />

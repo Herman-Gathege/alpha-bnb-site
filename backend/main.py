@@ -1,5 +1,5 @@
 # backend/main.py
-from flask import Flask
+from flask import Flask, app
 from backend.extensions import db, bcrypt, jwt, migrate
 from backend.config import get_config
 from backend.commands import create_admin
@@ -42,6 +42,7 @@ def create_app(config_name=None):
     from backend.modules.notifications.routes import notifications_bp
     from backend.modules.ai_readiness.routes import ai_bp
     from backend.modules.admin import admin_bp
+    from backend.modules.listings.routes import listings_bp
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(contact_bp, url_prefix="/api/contact")
@@ -52,6 +53,7 @@ def create_app(config_name=None):
     app.register_blueprint(notifications_bp, url_prefix="/api/notifications")
     app.register_blueprint(ai_bp, url_prefix="/api/ai-readiness")
     app.register_blueprint(admin_bp, url_prefix="/api/admin")
+    app.register_blueprint(listings_bp, url_prefix="/api")
 
     @app.route("/")
     def index():

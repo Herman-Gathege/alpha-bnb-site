@@ -108,9 +108,9 @@ const Navbar = () => {
 
           <li className="nav-item">
             <Link
-              to="/services"
+              to="/listings"
               className={`nav-links ${
-                isActiveRoute("/services") ? "active" : ""
+                isActiveRoute("/listings") ? "active" : ""
               }`}
               onClick={() => setIsOpen(false)}
             >
