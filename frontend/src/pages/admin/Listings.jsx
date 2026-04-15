@@ -4,10 +4,13 @@ import {
   getListings,
   createListing,
   toggleListing,
+  updateListing,
 } from "../../services/adminService";
 
 export default function Listings() {
   const [listings, setListings] = useState([]);
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState({});
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -54,6 +57,41 @@ export default function Listings() {
 
       await createListing(payload);
       alert("Listing created!");
+      loadListings();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  const startEdit = (listing) => {
+    setEditingId(listing.id);
+    setEditForm({
+      title: listing.title,
+      description: listing.description,
+      location_city: listing.location_city,
+      location_area: listing.location_area,
+      price_per_night: listing.price_per_night,
+      cleaning_fee: listing.cleaning_fee,
+      service_fee: listing.service_fee,
+      max_guests: listing.max_guests,
+      bedrooms: listing.bedrooms,
+      bathrooms: listing.bathrooms,
+    });
+  };
+
+  const saveEdit = async (id) => {
+    try {
+      await updateListing(id, {
+        ...editForm,
+        price_per_night: Number(editForm.price_per_night),
+        cleaning_fee: Number(editForm.cleaning_fee),
+        service_fee: Number(editForm.service_fee),
+        max_guests: Number(editForm.max_guests),
+        bedrooms: Number(editForm.bedrooms),
+        bathrooms: Number(editForm.bathrooms),
+      });
+
+      setEditingId(null);
       loadListings();
     } catch (err) {
       alert(err.message);
@@ -147,7 +185,7 @@ export default function Listings() {
 
               <div className="price-stack">
                 <p>
-                 (Per) Night: <strong>KES {l.price_per_night}</strong>
+                  (Per) Night: <strong>KES {l.price_per_night}</strong>
                 </p>
                 <p>Cleaning: KES {l.cleaning_fee}</p>
                 <p>Service: KES {l.service_fee}</p>
@@ -162,15 +200,125 @@ export default function Listings() {
               <div className="listing-admin-stats">
                 <span className="meta-list"> Images: {l.total_images}</span>
                 <span className="meta-list"> Bookings: {l.total_bookings}</span>
-                <span className="meta-list"> Blocked Days: {l.blocked_days}</span>
+                <span className="meta-list">
+                  {" "}
+                  Blocked Days: {l.blocked_days}
+                </span>
               </div>
 
               <small className="created-date">Created: {l.created_at}</small>
+
+              {editingId === l.id ? (
+                <div className="edit-grid full-edit-form">
+                  <h4>Edit Listing</h4>
+
+                  <input
+                    value={editForm.title || ""}
+                    placeholder="Title"
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, title: e.target.value })
+                    }
+                  />
+
+                  <input
+                    value={editForm.description || ""}
+                    placeholder="Description"
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, description: e.target.value })
+                    }
+                  />
+
+                  <input
+                    value={editForm.location_city || ""}
+                    placeholder="City"
+                    onChange={(e) =>
+                      setEditForm({
+                        ...editForm,
+                        location_city: e.target.value,
+                      })
+                    }
+                  />
+
+                  <input
+                    value={editForm.location_area || ""}
+                    placeholder="Area"
+                    onChange={(e) =>
+                      setEditForm({
+                        ...editForm,
+                        location_area: e.target.value,
+                      })
+                    }
+                  />
+
+                  <input
+                    value={editForm.price_per_night || ""}
+                    placeholder="Price per night"
+                    onChange={(e) =>
+                      setEditForm({
+                        ...editForm,
+                        price_per_night: e.target.value,
+                      })
+                    }
+                  />
+
+                  <input
+                    value={editForm.cleaning_fee || ""}
+                    placeholder="Cleaning fee"
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, cleaning_fee: e.target.value })
+                    }
+                  />
+
+                  <input
+                    value={editForm.service_fee || ""}
+                    placeholder="Service fee"
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, service_fee: e.target.value })
+                    }
+                  />
+
+                  <input
+                    value={editForm.max_guests || ""}
+                    placeholder="Guests"
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, max_guests: e.target.value })
+                    }
+                  />
+
+                  <input
+                    value={editForm.bedrooms || ""}
+                    placeholder="Bedrooms"
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, bedrooms: e.target.value })
+                    }
+                  />
+
+                  <input
+                    value={editForm.bathrooms || ""}
+                    placeholder="Bathrooms"
+                    onChange={(e) =>
+                      setEditForm({ ...editForm, bathrooms: e.target.value })
+                    }
+                  />
+
+                  <div className="edit-actions">
+                    <button onClick={() => saveEdit(l.id)}>Save Changes</button>
+                    <button onClick={() => setEditingId(null)}>Cancel</button>
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             <div className="listing-card-actions">
               <button onClick={() => handleToggle(l.id)}>
                 {l.is_active ? "Deactivate" : "Activate"}
+              </button>
+
+              <button
+                style={{ marginLeft: "20px", background: "red" }}
+                onClick={() => startEdit(l)}
+              >
+                Edit
               </button>
             </div>
           </div>

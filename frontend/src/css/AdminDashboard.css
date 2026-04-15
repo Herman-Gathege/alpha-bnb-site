@@ -113,7 +113,7 @@ button:hover {
 /* ===== CARD ===== */
 
 .listing-card {
-  background: #ffffff;
+  background: #e6e4e4;
   border-radius: 18px;
   padding: 22px 22px 18px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.06);
@@ -210,7 +210,7 @@ button:hover {
 }
 
 .price-stack {
-  background: #f8fafc;
+  background: #e6e4e4;
   padding: 12px 14px;
   border-radius: 10px;
   margin: 12px 0 14px;
@@ -225,4 +225,77 @@ button:hover {
   font-size: 13px;
   color: #6b7280;
   margin-right: 12px;
+}
+
+.edit-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-grid input {
+  padding: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.edit-grid button {
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.edit-grid button:first-of-type {
+  background: #111827;
+  color: white;
+}
+
+.edit-grid button:last-of-type {
+  background: #e5e7eb;
+}
+
+.full-edit-form {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.full-edit-form h4 {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #111827;
+}
+
+.full-edit-form input {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  font-size: 13px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.edit-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.edit-actions button:first-child {
+  background: #111827;
+  color: white;
+}
+
+.edit-actions button:last-child {
+  background: #e5e7eb;
 }
