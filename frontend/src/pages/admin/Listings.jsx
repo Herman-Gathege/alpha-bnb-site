@@ -167,7 +167,10 @@ export default function Listings() {
 
       <div className="listings-grid">
         {listings.map((l) => (
-          <div key={l.id} className="listing-card">
+          <div
+            key={l.id}
+            className={`listing-card ${editingId === l.id ? "editing" : ""}`}
+          >
             <div className="listing-card-header">
               <h3>{l.title}</h3>
               <span className={`status ${l.is_active ? "active" : "inactive"}`}>
@@ -303,7 +306,7 @@ export default function Listings() {
 
                   <div className="edit-actions">
                     <button onClick={() => saveEdit(l.id)}>Save Changes</button>
-                    <button onClick={() => setEditingId(null)}>Cancel</button>
+                    <button style={{background: "red"}} onClick={() => setEditingId(null)}>Cancel</button>
                   </div>
                 </div>
               ) : null}

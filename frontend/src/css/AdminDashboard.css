@@ -123,6 +123,8 @@ button:hover {
   flex-direction: column;
   justify-content: space-between;
   min-height: 360px;
+  height: fit-content;
+  align-self: start;
 }
 
 .listing-card:hover {
@@ -261,6 +263,8 @@ button:hover {
   border-radius: 12px;
   background: #f9fafb;
   border: 1px solid #e5e7eb;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .full-edit-form h4 {
@@ -298,4 +302,10 @@ button:hover {
 
 .edit-actions button:last-child {
   background: #e5e7eb;
+}
+
+.listing-card.editing {
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
 }
