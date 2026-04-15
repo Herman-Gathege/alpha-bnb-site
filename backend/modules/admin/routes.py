@@ -18,14 +18,19 @@ def create_listing():
     data = request.get_json()
 
     listing = Listing(
-    title=data["title"],
+        title=data["title"],
         description=data.get("description"),
         location_city=data.get("location_city"),
         location_area=data.get("location_area"),
+
         price_per_night=data["price_per_night"],
+        cleaning_fee=data.get("cleaning_fee", 0),   # ⭐ FIX
+        service_fee=data.get("service_fee", 0),     # ⭐ FIX
+
         max_guests=data.get("max_guests", 2),
         bedrooms=data.get("bedrooms", 1),
         bathrooms=data.get("bathrooms", 1),
+
         is_active=True
     )
 
@@ -49,10 +54,26 @@ def get_all_listings_admin():
         result.append({
             "id": l.id,
             "title": l.title,
-            "city": l.location_city,
-            "area": l.location_area,
+            "description": l.description,
+
+            # ⚠️ MUST MATCH FRONTEND NAMES
+            "location_city": l.location_city,
+            "location_area": l.location_area,
+
             "price_per_night": l.price_per_night,
-            "is_active": l.is_active
+            "cleaning_fee": l.cleaning_fee,
+            "service_fee": l.service_fee,
+
+            "max_guests": l.max_guests,
+            "bedrooms": l.bedrooms,
+            "bathrooms": l.bathrooms,
+
+            "is_active": l.is_active,
+            "created_at": l.created_at,
+
+            "total_images": len(l.images),
+            "total_bookings": len(l.bookings),
+            "blocked_days": len(l.blocked_dates),
         })
 
     return jsonify(result), 200
@@ -64,18 +85,25 @@ def update_listing(listing_id):
     listing = Listing.query.get_or_404(listing_id)
     data = request.get_json()
 
+    # Basic info
     listing.title = data.get("title", listing.title)
     listing.description = data.get("description", listing.description)
     listing.location_city = data.get("location_city", listing.location_city)
     listing.location_area = data.get("location_area", listing.location_area)
+
+    # Pricing  ⭐⭐⭐ MISSING BEFORE
     listing.price_per_night = data.get("price_per_night", listing.price_per_night)
+    listing.cleaning_fee = data.get("cleaning_fee", listing.cleaning_fee)
+    listing.service_fee = data.get("service_fee", listing.service_fee)
+
+    # Capacity
     listing.max_guests = data.get("max_guests", listing.max_guests)
     listing.bedrooms = data.get("bedrooms", listing.bedrooms)
     listing.bathrooms = data.get("bathrooms", listing.bathrooms)
 
     db.session.commit()
 
-    return jsonify({"message": "Listing updated"})
+    return jsonify({"message": "Listing updated successfully"}), 200
 
 
 # Admin route to toggle listing active status
@@ -124,17 +152,14 @@ def approve_booking(booking_id):
 
     booking.status = "confirmed"
 
-    # block the booked dates
-    current_date = booking.check_in
-    while current_date < booking.check_out:
-        blocked = BlockedDate(
-            listing_id=booking.listing_id,
-            start_date=booking.check_in,
-            end_date=booking.check_out,
-            reason="booking"
-        )
-        db.session.add(blocked)
-        current_date += timedelta(days=1)
+    # ✅ Create ONE blocked range (correct approach)
+    blocked = BlockedDate(
+        listing_id=booking.listing_id,
+        start_date=booking.check_in,
+        end_date=booking.check_out,
+        reason="booking"
+    )
+    db.session.add(blocked)
 
     db.session.commit()
     return jsonify({"msg": "Booking approved"})
@@ -166,11 +191,12 @@ def cancel_booking(booking_id):
 
     booking.status = "cancelled"
 
-    # remove blocked dates
+    # ✅ remove blocked range correctly
     BlockedDate.query.filter(
         BlockedDate.listing_id == booking.listing_id,
-        BlockedDate.date >= booking.check_in,
-        BlockedDate.date < booking.check_out
+        BlockedDate.start_date == booking.check_in,
+        BlockedDate.end_date == booking.check_out,
+        BlockedDate.reason == "booking"
     ).delete()
 
     db.session.commit()

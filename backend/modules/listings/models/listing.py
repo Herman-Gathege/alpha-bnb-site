@@ -31,5 +31,22 @@ class Listing(db.Model):
     bookings = db.relationship("Booking", backref="listing", lazy=True)
     blocked_dates = db.relationship("BlockedDate", backref="listing", lazy=True)
 
-    def __repr__(self):
-        return f"<Listing {self.title}>"
+def to_dict(self):
+    return {
+        "id": self.id,
+        "title": self.title,
+        "description": self.description,
+        "location_city": self.location_city,
+        "location_area": self.location_area,
+        "price_per_night": self.price_per_night,
+        "cleaning_fee": self.cleaning_fee,
+        "service_fee": self.service_fee,
+        "max_guests": self.max_guests,
+        "bedrooms": self.bedrooms,
+        "bathrooms": self.bathrooms,
+        "is_active": self.is_active,
+        "created_at": self.created_at.isoformat()
+    }
+
+    # def __repr__(self):
+    #     return f"<Listing {self.title}>"
