@@ -57,3 +57,17 @@ export const blockDates = async (data) => {
   const res = await api.post("/admin/block-dates", data);
   return res.data;
 };
+
+export const uploadListingImages = async (id, formData) => {
+  const res = await api.post(
+    `/admin/listings/${id}/images`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+
+  return res.data;
+};

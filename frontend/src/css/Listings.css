@@ -15,7 +15,6 @@
 .listings-intro {
   font-size: 1.2rem;
   margin-top: 0;
-  background-color: #66666667;
   /* width: 100%; */
   justify-content: center;
   margin: 0 auto;
@@ -123,4 +122,68 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
+}
+
+.image-slider {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.listing-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* arrows */
+.img-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.575);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.img-nav.left {
+  left: 10px;
+}
+
+.img-nav.right {
+  right: 10px;
+}
+
+.img-nav:hover {
+  background: rgba(231, 229, 229, 0.733);
+}
+
+
+
+/* dots */
+.img-dots {
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+}
+
+.dot.active {
+  background: white;
 }

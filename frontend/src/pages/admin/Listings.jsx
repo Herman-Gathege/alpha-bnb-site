@@ -1,3 +1,4 @@
+//frontend/src/pages/admin/Listings.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -5,12 +6,15 @@ import {
   createListing,
   toggleListing,
   updateListing,
+  uploadListingImages,
 } from "../../services/adminService";
 
 export default function Listings() {
   const [listings, setListings] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({});
+  const [uploadingId, setUploadingId] = useState(null);
+  const [images, setImages] = useState([]);
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -45,6 +49,11 @@ export default function Listings() {
   // 🔥 Convert numbers before sending to API
   const handleCreate = async () => {
     try {
+      // 1. Upload images first
+      const uploadedUrls = await Promise.all(
+        images.map(async (img) => await uploadImageToCloudinary(img)),
+      );
+
       const payload = {
         ...form,
         price_per_night: Number(form.price_per_night),
@@ -53,6 +62,7 @@ export default function Listings() {
         max_guests: Number(form.max_guests),
         bedrooms: Number(form.bedrooms),
         bathrooms: Number(form.bathrooms),
+        images: uploadedUrls,
       };
 
       await createListing(payload);
@@ -60,6 +70,29 @@ export default function Listings() {
       loadListings();
     } catch (err) {
       alert(err.message);
+    }
+  };
+
+  const handleUploadImages = async (listingId) => {
+    if (!images.length) return;
+
+    try {
+      setUploadingId(listingId);
+
+      const formData = new FormData();
+      for (let i = 0; i < images.length; i++) {
+        formData.append("images", images[i]);
+      }
+
+      await uploadListingImages(listingId, formData);
+
+      alert("Images uploaded!");
+      setImages([]);
+      loadListings();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setUploadingId(null);
     }
   };
 
@@ -171,6 +204,15 @@ export default function Listings() {
             key={l.id}
             className={`listing-card ${editingId === l.id ? "editing" : ""}`}
           >
+            <div className="image-preview">
+              {Array.isArray(l.images) && l.images.length > 0 ? (
+                l.images.map((img) => (
+                  <img key={img.id} src={img.image_url} alt="listing" />
+                ))
+              ) : (
+                <p className="no-images">No images uploaded</p>
+              )}
+            </div>
             <div className="listing-card-header">
               <h3>{l.title}</h3>
               <span className={`status ${l.is_active ? "active" : "inactive"}`}>
@@ -306,7 +348,35 @@ export default function Listings() {
 
                   <div className="edit-actions">
                     <button onClick={() => saveEdit(l.id)}>Save Changes</button>
-                    <button style={{background: "red"}} onClick={() => setEditingId(null)}>Cancel</button>
+                    <button
+                      style={{ background: "red" }}
+                      onClick={() => setEditingId(null)}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+
+                  <div className="image-upload-box">
+                    <h4>Upload Images</h4>
+
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={(e) => setImages(e.target.files)}
+                    />
+
+                    <button
+                      style={{
+                        marginTop: "10px",
+                        background: "#4475b9",
+                        color: "white",
+                      }}
+                      onClick={() => handleUploadImages(l.id)}
+                      disabled={uploadingId === l.id}
+                    >
+                      {uploadingId === l.id ? "Uploading..." : "Upload Images"}
+                    </button>
                   </div>
                 </div>
               ) : null}

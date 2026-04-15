@@ -5,6 +5,8 @@ from backend.config import get_config
 from backend.commands import create_admin
 import backend.modules.core.models
 from flask_cors import CORS
+from backend.extensions.cloudinary import init_cloudinary
+
 
 
 def create_app(config_name=None):
@@ -31,6 +33,8 @@ def create_app(config_name=None):
     bcrypt.init_app(app)
     jwt.init_app(app)
     migrate.init_app(app, db)
+    init_cloudinary(app)
+
 
     # Blueprints
     from backend.modules.auth.routes import auth_bp

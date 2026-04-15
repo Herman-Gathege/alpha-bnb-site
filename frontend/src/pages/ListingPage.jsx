@@ -1,8 +1,69 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { getPublicListings } from "../services/listingsService"; // adjust path if needed
+import { getPublicListings } from "../services/listingsService";
 import "../css/Listings.css";
+
+/* ================= IMAGE SLIDER (MOVE OUTSIDE COMPONENT FOR STABILITY) ================= */
+const ImageSlider = ({ images = [], title }) => {
+  const [index, setIndex] = useState(0);
+
+  const safeImages = Array.isArray(images) ? images : [];
+
+  if (!safeImages.length) {
+    return (
+      <img
+        src="/images/placeholder.jpg"
+        alt={title}
+        className="listing-img"
+      />
+    );
+  }
+
+  const prev = (e) => {
+    e.preventDefault();
+    setIndex((prev) => (prev === 0 ? safeImages.length - 1 : prev - 1));
+  };
+
+  const next = (e) => {
+    e.preventDefault();
+    setIndex((prev) =>
+      prev === safeImages.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  return (
+    <div className="image-slider">
+      <img
+        src={safeImages[index].image_url}
+        alt={title}
+        className="listing-img"
+      />
+
+      {safeImages.length > 1 && (
+        <>
+          <button className="img-nav left" onClick={prev}>
+            ‹
+          </button>
+
+          <button className="img-nav right" onClick={next}>
+            ›
+          </button>
+
+          <div className="img-dots">
+            {safeImages.map((_, i) => (
+              <span
+                key={i}
+                className={i === index ? "dot active" : "dot"}
+                onClick={() => setIndex(i)}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
 
 const Listings = () => {
   const [listings, setListings] = useState([]);
@@ -23,7 +84,7 @@ const Listings = () => {
     }
   };
 
-  const featuredListings = listings.filter((l) => l.is_featured); // optional later
+  const featuredListings = listings.filter((l) => l.is_featured);
   const normalListings = listings.filter((l) => !l.is_featured);
 
   return (
@@ -45,9 +106,9 @@ const Listings = () => {
         <section className="featured-listing">
           {featuredListings.map((listing) => (
             <div key={listing.id} className="listing-card featured">
-              <img
-                src={listing.image_url || "/images/placeholder.jpg"}
-                alt={listing.title}
+              <ImageSlider
+                images={listing.images}
+                title={listing.title}
               />
 
               <div className="listing-info">
@@ -63,7 +124,10 @@ const Listings = () => {
                   KES {listing.price_per_night} / night
                 </p>
 
-                <a href={`/listing/${listing.id}`} className="btn-primary">
+                <a
+                  href={`/listing/${listing.id}`}
+                  className="btn-primary"
+                >
                   View Details
                 </a>
               </div>
@@ -82,9 +146,9 @@ const Listings = () => {
           <div className="listings-grid">
             {normalListings.map((listing) => (
               <div key={listing.id} className="listing-card">
-                <img
-                  src={listing.image_url || "/images/placeholder.jpg"}
-                  alt={listing.title}
+                <ImageSlider
+                  images={listing.images}
+                  title={listing.title}
                 />
 
                 <div className="listing-info">
@@ -98,7 +162,10 @@ const Listings = () => {
                     KES {listing.price_per_night} / night
                   </p>
 
-                  <a href={`/listing/${listing.id}`} className="btn-primary">
+                  <a
+                    href={`/listing/${listing.id}`}
+                    className="btn-primary"
+                  >
                     View Details
                   </a>
                 </div>

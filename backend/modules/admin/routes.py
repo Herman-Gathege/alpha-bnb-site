@@ -17,6 +17,7 @@ from backend.modules.listings.models.listing_image import ListingImage
 def create_listing():
     data = request.get_json()
 
+    # 1. Create listing first
     listing = Listing(
         title=data["title"],
         description=data.get("description"),
@@ -24,8 +25,8 @@ def create_listing():
         location_area=data.get("location_area"),
 
         price_per_night=data["price_per_night"],
-        cleaning_fee=data.get("cleaning_fee", 0),   # ⭐ FIX
-        service_fee=data.get("service_fee", 0),     # ⭐ FIX
+        cleaning_fee=data.get("cleaning_fee", 0),
+        service_fee=data.get("service_fee", 0),
 
         max_guests=data.get("max_guests", 2),
         bedrooms=data.get("bedrooms", 1),
@@ -35,6 +36,19 @@ def create_listing():
     )
 
     db.session.add(listing)
+    db.session.commit()  # ✅ IMPORTANT: generates listing.id
+
+    # 2. Handle images (URLs for now / Cloudinary later)
+    images = data.get("images", [])
+
+    for i, url in enumerate(images):
+        img = ListingImage(
+            listing_id=listing.id,
+            image_url=url,
+            display_order=i
+        )
+        db.session.add(img)
+
     db.session.commit()
 
     return jsonify({
@@ -74,6 +88,14 @@ def get_all_listings_admin():
             "total_images": len(l.images),
             "total_bookings": len(l.bookings),
             "blocked_days": len(l.blocked_dates),
+            "images": [
+                    {
+                        "id": img.id,
+                        "image_url": img.image_url,
+                        "display_order": img.display_order
+                    }
+                    for img in sorted(l.images, key=lambda x: x.display_order)
+                ],
         })
 
     return jsonify(result), 200
@@ -226,3 +248,39 @@ def block_dates():
     db.session.commit()
 
     return jsonify({"msg": "Dates blocked"}), 201
+
+
+@admin_bp.route("/listings/<int:listing_id>/images", methods=["POST"])
+@admin_required
+def upload_listing_images(listing_id):
+    from backend.modules.listings.models import Listing
+    from backend.modules.listings.models.listing_image import ListingImage
+    import cloudinary.uploader
+
+    listing = Listing.query.get_or_404(listing_id)
+
+    if "images" not in request.files:
+        return jsonify({"error": "No images provided"}), 400
+
+    files = request.files.getlist("images")
+
+    uploaded_images = []
+
+    for index, file in enumerate(files):
+        result = cloudinary.uploader.upload(file)
+
+        img = ListingImage(
+            listing_id=listing.id,
+            image_url=result["secure_url"],
+            display_order=index
+        )
+
+        db.session.add(img)
+        uploaded_images.append(result["secure_url"])
+
+    db.session.commit()
+
+    return jsonify({
+        "message": "Images uploaded",
+        "images": uploaded_images
+    }), 201
