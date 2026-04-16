@@ -12,27 +12,27 @@ import AIReadiness from "./pages/AIReadiness";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import ListingDetails from "./pages/ListingDetails";
-
-
-/* Dashboard */
-import DashboardLayout from "./pages/dashboard/DashboardLayout";
-// import DashboardHome from "./pages/dashboard/DashboardHome";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import DashboardLeads from "./pages/dashboard/DashboardLeads";
-import DashboardAIReadiness from "./pages/dashboard/DashboardAIReadiness";
-import DashboardMessages from "./pages/dashboard/DashboardMessages";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
+/* Dashboard */
+import DashboardLayout from "./pages/dashboard/DashboardLayout";
+import UserDashboard from "./pages/dashboard/UserDashboard";
+import DashboardLeads from "./pages/dashboard/DashboardLeads";
+import DashboardAIReadiness from "./pages/dashboard/DashboardAIReadiness";
+import DashboardMessages from "./pages/dashboard/DashboardMessages";
 
-//Auth
+/* Admin */
+import AdminDashboard from "./pages/admin/AdminDashboard";
+
+/* Auth */
 import PrivateRoute from "./auth/PrivateRoute";
-
 
 function App() {
   return (
     <Router>
       <Routes>
+
         {/* 🌍 Public Routes */}
         <Route path="/" element={<Home />} />
         <Route path="/listings" element={<ListingPage />} />
@@ -41,18 +41,31 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/ai-readiness" element={<AIReadiness />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/listing/:id" element={<ListingDetails />} />
-        <Route path="/register" element={<Register />} />
-        
 
-
-        {/* 📊 Protected Dashboard Routes */}
+        {/* 📊 USER DASHBOARD ROUTES */}
         <Route
           path="/dashboard"
           element={
             <PrivateRoute>
+              <DashboardLayout />
+            </PrivateRoute>
+          }
+        >
+          <Route index element={<UserDashboard />} />
+          <Route path="leads" element={<DashboardLeads />} />
+          <Route path="ai-readiness" element={<DashboardAIReadiness />} />
+          <Route path="contacts" element={<DashboardMessages />} />
+        </Route>
+
+        {/* 👑 ADMIN ROUTES */}
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute role="admin">
               <DashboardLayout />
             </PrivateRoute>
           }
@@ -62,6 +75,7 @@ function App() {
           <Route path="ai-readiness" element={<DashboardAIReadiness />} />
           <Route path="contacts" element={<DashboardMessages />} />
         </Route>
+
       </Routes>
 
       <ToastContainer position="top-right" autoClose={3000} />

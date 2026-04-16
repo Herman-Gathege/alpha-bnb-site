@@ -30,8 +30,17 @@ const Login = () => {
       // Save JWT
       setToken(res.data.access_token);
 
-      // Redirect back to where user came from
-      navigate(redirectTo);
+      // ✅ Save user (needed for role-based routing + PrivateRoute)
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      // 👑 Role-based redirect (override redirectTo if login is direct)
+      const role = res.data.user?.role;
+
+      if (role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate(redirectTo || "/dashboard");
+      }
     } catch (err) {
       setError("Invalid email or password");
     }
