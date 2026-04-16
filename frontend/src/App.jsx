@@ -11,6 +11,7 @@ import Contact from "./pages/Contact";
 import AIReadiness from "./pages/AIReadiness";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import ListingDetails from "./pages/ListingDetails";
 
 
 /* Dashboard */
@@ -41,6 +42,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/listing/:id" element={<ListingDetails />} />
+        
 
 
         {/* 📊 Protected Dashboard Routes */}
