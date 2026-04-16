@@ -1,27 +1,37 @@
-// frontend/src/pages/Login.jsx
 import React, { useState } from "react";
 import api from "../api/axiosConfig";
 import { setToken, isAuthenticated } from "../auth/auth";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, useLocation } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
-  // ✅ Redirect if already logged in
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // 🔥 Get redirect destination
+  const params = new URLSearchParams(location.search);
+  const redirectTo = params.get("redirect") || "/dashboard";
+
+  // If already logged in → go to destination
   if (isAuthenticated()) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={redirectTo} replace />;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
     try {
       const res = await api.post("/auth/login", { email, password });
+
+      // Save JWT
       setToken(res.data.access_token);
-      navigate("/dashboard");
+
+      // Redirect back to where user came from
+      navigate(redirectTo);
     } catch (err) {
       setError("Invalid email or password");
     }
@@ -30,9 +40,9 @@ const Login = () => {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
-        <h1 style={styles.brand}>SureStep</h1>
-        <h2 style={styles.title}>Admin Login</h2>
-        <p style={styles.subtitle}>Access the operations dashboard</p>
+        <h1 style={styles.brand}>MySpace by AlphaOne</h1>
+        <h2 style={styles.title}>Welcome back</h2>
+        <p style={styles.subtitle}>Login to continue your booking</p>
 
         {error && <div style={styles.error}>{error}</div>}
 
@@ -41,7 +51,7 @@ const Login = () => {
             <label style={styles.label}>Email</label>
             <input
               type="email"
-              placeholder="you@company.com"
+              placeholder="you@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -62,9 +72,17 @@ const Login = () => {
           </div>
 
           <button type="submit" style={styles.button}>
-            Sign in
+            Login
           </button>
         </form>
+
+        {/* 👉 We will build this page next */}
+        <p style={styles.register}>
+          Don’t have an account?{" "}
+          <span onClick={() => navigate(`/register?redirect=${redirectTo}`)}>
+            Create one
+          </span>
+        </p>
       </div>
     </div>
   );
@@ -90,7 +108,7 @@ const styles = {
   brand: {
     fontSize: "20px",
     fontWeight: "700",
-    color: "#2563eb",
+    color: "#B10F3A",
     marginBottom: "8px",
     textAlign: "center",
   },
@@ -135,18 +153,22 @@ const styles = {
     borderRadius: "8px",
     border: "1px solid #d1d5db",
     fontSize: "14px",
-    outline: "none",
   },
   button: {
     marginTop: "8px",
     padding: "12px",
     borderRadius: "10px",
     border: "none",
-    backgroundColor: "#2563eb",
+    backgroundColor: "#B10F3A",
     color: "#ffffff",
     fontSize: "15px",
     fontWeight: "600",
     cursor: "pointer",
+  },
+  register: {
+    marginTop: "20px",
+    textAlign: "center",
+    fontSize: "14px",
   },
 };
 

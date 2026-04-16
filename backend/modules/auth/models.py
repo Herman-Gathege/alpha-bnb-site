@@ -1,3 +1,4 @@
+#backend/modules/auth/models.py
 from backend.extensions import db, bcrypt
 from flask_jwt_extended import create_access_token
 from datetime import timedelta, datetime

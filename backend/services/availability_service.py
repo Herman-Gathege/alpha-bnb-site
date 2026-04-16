@@ -1,7 +1,7 @@
 #backend/services/availability_service.py
 from datetime import timedelta
-from backend.models.booking import Booking
-from backend.models.blocked_date import BlockedDate
+from backend.modules.bookings.models.booking import Booking
+from backend.modules.bookings.models.blocked_date import BlockedDate
 
 class AvailabilityService:
 

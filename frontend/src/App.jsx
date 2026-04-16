@@ -22,6 +22,7 @@ import DashboardLeads from "./pages/dashboard/DashboardLeads";
 import DashboardAIReadiness from "./pages/dashboard/DashboardAIReadiness";
 import DashboardMessages from "./pages/dashboard/DashboardMessages";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 
 //Auth
@@ -43,6 +44,7 @@ function App() {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/listing/:id" element={<ListingDetails />} />
+        <Route path="/register" element={<Register />} />
         
 
 

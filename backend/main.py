@@ -47,6 +47,7 @@ def create_app(config_name=None):
     from backend.modules.ai_readiness.routes import ai_bp
     from backend.modules.admin import admin_bp
     from backend.modules.listings.routes import listings_bp
+    from backend.modules.bookings.routes import bookings_bp
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(contact_bp, url_prefix="/api/contact")
@@ -58,6 +59,7 @@ def create_app(config_name=None):
     app.register_blueprint(ai_bp, url_prefix="/api/ai-readiness")
     app.register_blueprint(admin_bp, url_prefix="/api/admin")
     app.register_blueprint(listings_bp, url_prefix="/api")
+    app.register_blueprint(bookings_bp, url_prefix="/api")
 
     @app.route("/")
     def index():
