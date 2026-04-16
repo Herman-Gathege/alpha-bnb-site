@@ -66,3 +66,5 @@ def create_app(config_name=None):
         return "Alpha-one backend is running!"
 
     return app
+
+app = create_app()
