@@ -1,42 +1,34 @@
-/* frontend/src/css/Navbar.css */
-
+/* ================= NAVBAR BASE ================= */
 .navbar {
-  background-color: #fff; /* SureStep primary color */
+  background-color: #fff;
   height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
   position: sticky;
   top: 0;
   z-index: 999;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   height: 70px;
-  z-index: 1;
   width: 100%;
   max-width: 1200px;
   padding: 0 24px;
 }
 
+/* ================= LOGO ================= */
 .navbar-logo {
   display: flex;
   align-items: center;
-  justify-self: flex-start;
-  cursor: pointer;
   text-decoration: none;
 }
 
 .navbar-logo-img {
-  height: 42px;              /* fits nicely in 70px navbar */
-  width: auto;
-  object-fit: contain;
-  display: block;
+  height: 42px;
 }
 
 .navbar-logo-text {
@@ -46,46 +38,85 @@
   color: #000;
 }
 
-
+/* ================= MENU ICON ================= */
 .menu-icon {
   display: none;
-  color: #000;
   font-size: 1.8rem;
   cursor: pointer;
 }
 
+/* ================= NAV LINKS ================= */
 .nav-menu {
   display: flex;
   align-items: center;
   list-style: none;
-  text-align: center;
 }
 
-.nav-item {
-  height: 70px;
+.nav-item { height: 70px; 
+
 }
 
 .nav-links {
   color: #000;
   display: flex;
   align-items: center;
-  text-decoration: none;
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  outline: none;
+  transition: all .25s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
+/* 🔥 REMOVE BLUE BOX */
+.nav-links:focus,
+.nav-links:active,
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* 🔥 BRAND HOVER COLOR */
 .nav-links:hover {
-  color: #ffd166; /* Accent color */
+  color: #f4c430;
+  background: rgba(244,196,48,.12);
 }
 
+/* ================= ACTIVE UNDERLINE (DESKTOP) ================= */
+.nav-links::after {
+  content: "";
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 18px;
+  height: 2px;
+  background: #f4c430;
+  transition: transform .3s ease;
+}
+
+.nav-links.active {
+  color: #B10F3A;
+  font-weight: 600;
+}
+
+.nav-links.active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* ================= CTA ================= */
 .nav-cta {
   background-color: #B10F3A;
   color: #fff;
-  font-weight: 600;
   padding: 8px 16px;
-  border-radius: 0px 0px 4px 4px;
+  border-radius: 4px;
   margin-left: 8px;
+  font-weight: 600;
+  border-radius: 0px 0px 4px 4px;
 }
 
 .nav-cta:hover {
@@ -93,123 +124,54 @@
   color: #0d3b66;
 }
 
-/* Active nav link (scroll-based) */
-.nav-links.active {
-  color: #B10F3A;
-  font-weight: 600;
-  position: relative;
-}
+.nav-links.nav-cta::after { display:none; }
 
-.nav-links.active::after {
-  content: "";
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 16px;
-  height: 2px;
-  background-color: #B10F3A;
-  border-radius: 2px;
-}
+/* ================= MOBILE ================= */
+@media screen and (max-width:768px) {
 
-/* Prevent CTA from getting underline */
-.nav-links.nav-cta::after {
-  display: none;
-}
+  .menu-icon { display:block; }
 
-/* Make nav buttons look like links */
-.nav-menu button {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-
-  display: inline-flex;
-  align-items: center;
-}
-
-/* Ensure buttons behave like nav links */
-.nav-menu button.nav-links {
-  text-decoration: none;
-}
-/* Make nav buttons match nav link layout exactly */
-.nav-menu button.nav-links {
-  display: flex;
-  align-items: center;
-  padding: 0 1rem;
-  height: 100%;
-}
-
-
-/* =========================
-   MOBILE NAVBAR FIX
-========================= */
-@media screen and (max-width: 768px) {
-  .menu-icon {
-    display: block;
-    z-index: 1001;
-  }
-
-  /* Drawer container */
   .nav-menu {
     position: fixed;
-    top: 70px;
-    right: -100%;
-    width: 100%;
-    max-width: 320px;
-    height: calc(100vh - 70px);
-    background-color: #ffffff;
-    flex-direction: column;
-    align-items: stretch;
-    padding: 1.5rem 1.25rem;
-    gap: 0.25rem;
-
-    transition: right 0.35s ease;
-    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.08);
+    top:70px;
+    right:-100%;
+    width:100%;
+    max-width:320px;
+    height:calc(100vh - 70px);
+    background:#fff;
+    flex-direction:column;
+    padding:1.5rem;
+    transition:right .35s ease;
+    box-shadow:-4px 0 12px rgba(0,0,0,.08);
   }
 
-  .nav-menu.active {
-    right: 0;
+  .nav-menu.active { right:0; }
+
+  .nav-item { height:auto; }
+
+
+  .nav-links {
+    height:auto;
+    padding:.9rem .75rem;
+    border-radius:6px;
   }
 
-  .nav-item {
-    height: auto;
-  }
-
-  /* Reset desktop link styles */
-  .nav-links,
-  .nav-menu button.nav-links {
-    height: auto;
-    padding: 0.9rem 0.75rem;
-    font-size: 1rem;
-    border-radius: 6px;
-    justify-content: flex-start;
-  }
-
+  /* mobile hover */
   .nav-links:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+    background: rgba(244,196,48,.12);
+    color:#B10F3A;
   }
 
-  /* Active indicator */
+  /* mobile active */
   .nav-links.active {
-    background-color: rgba(177, 15, 58, 0.08);
+    background: rgba(177,15,58,.1);
   }
 
-  .nav-links.active::after {
-    display: none;
-  }
+  .nav-links::after { display:none; }
 
-  /* CTA button */
   .nav-cta {
-    margin-top: 1rem;
-    margin-left: 0;
-    text-align: center;
-    justify-content: center;
-    padding: 0.85rem;
-    font-size: 0.95rem;
+    margin-top:1rem;
+    margin-left:0;
+    text-align:center;
   }
 }

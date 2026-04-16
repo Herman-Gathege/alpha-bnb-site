@@ -10,7 +10,7 @@ const DashboardLayout = () => {
       {/* Sidebar */}
       <aside style={styles.sidebar}>
         <Link to="/" style={{ textDecoration: "none" , color: "inherit" }}>
-          <h2 style={styles.logo}>SureStep</h2>
+          <h2 style={styles.logo}>MySpace</h2>
         </Link>
 
         <nav style={styles.nav}>
@@ -21,7 +21,7 @@ const DashboardLayout = () => {
               isActive ? styles.activeLink : styles.link
             }
           >
-            Dashboard
+            Home
           </NavLink>
 
           <NavLink

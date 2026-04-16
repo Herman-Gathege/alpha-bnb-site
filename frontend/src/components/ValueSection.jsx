@@ -53,7 +53,7 @@ const ValueSection = () => {
 
       <div className="carousel">
         <button className="nav left" onClick={prevSlide}>
-          <FaChevronLeft />
+          <FaChevronLeft style={{ color: "black" }} />
         </button>
 
         <motion.img
@@ -68,7 +68,7 @@ const ValueSection = () => {
         />
 
         <button className="nav right" onClick={nextSlide}>
-          <FaChevronRight />
+          <FaChevronRight style={{ color: "black" }}/>
         </button>
       </div>
 

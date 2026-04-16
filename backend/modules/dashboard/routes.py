@@ -1,7 +1,7 @@
 # backend/modules/dashboard/routes.py
 from flask import Blueprint, jsonify
-from modules.leads.models import Lead
-from modules.contact.models import ContactMessage
+from backend.modules.leads.models import Lead
+from backend.modules.contact.models import ContactMessage
 
 
 dashboard_bp = Blueprint("dashboard", __name__, url_prefix="/dashboard")

@@ -1,4 +1,4 @@
-from extensions import db
+from backend.extensions import db
 
 class PortfolioItem(db.Model):
     __tablename__ = "portfolio_items"

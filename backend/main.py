@@ -1,23 +1,26 @@
 # backend/main.py
-from flask import Flask
-from extensions import db, bcrypt, jwt, migrate
-from config import get_config
-from commands import create_admin
-import modules.core.models
+from flask import Flask, app
+from backend.extensions import db, bcrypt, jwt, migrate
+from backend.config import get_config
+from backend.commands import create_admin
+import backend.modules.core.models
 from flask_cors import CORS
+from backend.extensions.cloudinary import init_cloudinary
 
 
-def create_app():
+
+def create_app(config_name=None):
     app = Flask(__name__)
-    app.config.from_object(get_config())
+
+    # Allow pytest to pass "testing"
+    if config_name:
+        app.config.from_object(get_config(config_name))
+    else:
+        app.config.from_object(get_config())
+
     app.cli.add_command(create_admin)
 
-    # Enable CORS
-    # CORS(app, resources={r"/api/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
-    frontend_url = app.config.get(
-        "FRONTEND_URL",
-        "http://localhost:5173"
-    )
+    frontend_url = app.config.get("FRONTEND_URL", "http://localhost:5173")
 
     CORS(
         app,
@@ -30,17 +33,21 @@ def create_app():
     bcrypt.init_app(app)
     jwt.init_app(app)
     migrate.init_app(app, db)
+    init_cloudinary(app)
 
-    # Import & register blueprints
-    from modules.auth.routes import auth_bp
-    from modules.contact.routes import contact_bp
-    from modules.leads.routes import leads_bp
-    from modules.services.routes import services_bp
-    from modules.dashboard.routes import dashboard_bp
-    from modules.portfolio.routes import portfolio_bp
-    from modules.notifications.routes import notifications_bp
-    from modules.ai_readiness.routes import ai_bp
 
+    # Blueprints
+    from backend.modules.auth.routes import auth_bp
+    from backend.modules.contact.routes import contact_bp
+    from backend.modules.leads.routes import leads_bp
+    from backend.modules.services.routes import services_bp
+    from backend.modules.dashboard.routes import dashboard_bp
+    from backend.modules.portfolio.routes import portfolio_bp
+    from backend.modules.notifications.routes import notifications_bp
+    from backend.modules.ai_readiness.routes import ai_bp
+    from backend.modules.admin import admin_bp
+    from backend.modules.listings.routes import listings_bp
+    from backend.modules.bookings.routes import bookings_bp
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(contact_bp, url_prefix="/api/contact")
@@ -50,7 +57,9 @@ def create_app():
     app.register_blueprint(portfolio_bp, url_prefix="/api/portfolio")
     app.register_blueprint(notifications_bp, url_prefix="/api/notifications")
     app.register_blueprint(ai_bp, url_prefix="/api/ai-readiness")
-
+    app.register_blueprint(admin_bp, url_prefix="/api/admin")
+    app.register_blueprint(listings_bp, url_prefix="/api")
+    app.register_blueprint(bookings_bp, url_prefix="/api")
 
     @app.route("/")
     def index():

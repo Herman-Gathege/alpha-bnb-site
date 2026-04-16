@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../css/landing.css";
 
 const AboutPreview = () => {
   return (
@@ -41,7 +42,7 @@ const AboutPreview = () => {
             </p>
 
             <div className="hero-actions">
-              <Link to="/contact" className="btn-primary">
+              <Link to="/contact" className="cta-btn">
                 Message Eric
               </Link>
             </div>

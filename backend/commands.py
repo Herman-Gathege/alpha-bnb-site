@@ -1,7 +1,7 @@
 from flask.cli import with_appcontext
 import click
-from extensions import db, bcrypt
-from modules.auth.models import User
+from backend.extensions import db, bcrypt
+from backend.modules.auth.models import User
 
 
 @click.command(name="create-admin")

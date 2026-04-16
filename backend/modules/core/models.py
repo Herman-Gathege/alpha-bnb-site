@@ -1,6 +1,6 @@
 # modules/core/models.py
 
-from extensions import db
+from backend.extensions import db
 from datetime import datetime
 
 class BaseModel(db.Model):
@@ -10,6 +10,6 @@ class BaseModel(db.Model):
 
 
 # 🔽 Import all models so Alembic can detect them
-from modules.contact.models import ContactMessage
-from modules.leads.models import Lead
-from modules.ai_readiness.models import AIReadiness
+from backend.modules.contact.models import ContactMessage
+from backend.modules.leads.models import Lead
+from backend.modules.ai_readiness.models import AIReadiness

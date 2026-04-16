@@ -1,11 +1,11 @@
 # backend/modules/ai_readiness/routes.py
 from flask import Blueprint, request, jsonify
-from extensions import db
+from backend.extensions import db
 
-from modules.leads.models import Lead
-from modules.ai_readiness.models import AIReadiness
-from modules.ai_readiness.questions import QUESTIONS
-from modules.ai_readiness.utils import (
+from backend.modules.leads.models import Lead
+from backend.modules.ai_readiness.models import AIReadiness
+from backend.modules.ai_readiness.questions import QUESTIONS
+from backend.modules.ai_readiness.utils import (
     calculate_score,
     readiness_status,
     cta_message
