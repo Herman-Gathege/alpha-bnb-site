@@ -20,11 +20,17 @@ def create_app(config_name=None):
 
     app.cli.add_command(create_admin)
 
-    frontend_url = app.config.get("FRONTEND_URL", "http://localhost:5173", "https://myspace-mu-three.vercel.app/")
+    frontend_urls = app.config.get(
+        "FRONTEND_URLS",
+        [
+            "http://localhost:5173",
+            "https://myspace-mu-three.vercel.app"
+        ]
+    )
 
     CORS(
         app,
-        resources={r"/api/*": {"origins": frontend_url}},
+        resources={r"/api/*": {"origins": frontend_urls}},
         supports_credentials=True
     )
 
