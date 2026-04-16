@@ -62,6 +62,7 @@ config_by_name = {
     "development": DevelopmentConfig,
     "production": ProductionConfig,
     "testing": TestingConfig,
+    "deployment": ProductionConfig,   # ← required for Render
 }
 
 
