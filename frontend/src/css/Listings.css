@@ -143,13 +143,22 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.575);
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.6);
   color: white;
+
   border: none;
-  width: 32px;
-  height: 32px;
   border-radius: 50%;
   cursor: pointer;
+
+  padding: 0; /* IMPORTANT */
 }
 
 .img-nav.left {

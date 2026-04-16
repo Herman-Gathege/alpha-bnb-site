@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { getPublicListings } from "../services/listingsService";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import "../css/Listings.css";
 
 /* ================= IMAGE SLIDER (MOVE OUTSIDE COMPONENT FOR STABILITY) ================= */
@@ -12,11 +13,7 @@ const ImageSlider = ({ images = [], title }) => {
 
   if (!safeImages.length) {
     return (
-      <img
-        src="/images/placeholder.jpg"
-        alt={title}
-        className="listing-img"
-      />
+      <img src="/images/placeholder.jpg" alt={title} className="listing-img" />
     );
   }
 
@@ -27,9 +24,7 @@ const ImageSlider = ({ images = [], title }) => {
 
   const next = (e) => {
     e.preventDefault();
-    setIndex((prev) =>
-      prev === safeImages.length - 1 ? 0 : prev + 1
-    );
+    setIndex((prev) => (prev === safeImages.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -43,11 +38,11 @@ const ImageSlider = ({ images = [], title }) => {
       {safeImages.length > 1 && (
         <>
           <button className="img-nav left" onClick={prev}>
-            ‹
+            <FaChevronLeft size={14} />
           </button>
 
           <button className="img-nav right" onClick={next}>
-            ›
+            <FaChevronRight size={14} />
           </button>
 
           <div className="img-dots">
@@ -95,9 +90,7 @@ const Listings = () => {
       <section className="listings-hero">
         <div className="listings-hero-content">
           <h1>MySpace by Alpha One</h1>
-          <p className="listings-intro">
-            Welcome to the Home of Perfect Stays
-          </p>
+          <p className="listings-intro">Welcome to the Home of Perfect Stays</p>
         </div>
       </section>
 
@@ -106,10 +99,7 @@ const Listings = () => {
         <section className="featured-listing">
           {featuredListings.map((listing) => (
             <div key={listing.id} className="listing-card featured">
-              <ImageSlider
-                images={listing.images}
-                title={listing.title}
-              />
+              <ImageSlider images={listing.images} title={listing.title} />
 
               <div className="listing-info">
                 <h2>{listing.title}</h2>
@@ -124,10 +114,7 @@ const Listings = () => {
                   KES {listing.price_per_night} / night
                 </p>
 
-                <a
-                  href={`/listing/${listing.id}`}
-                  className="btn-primary"
-                >
+                <a href={`/listing/${listing.id}`} className="btn-primary">
                   View Details
                 </a>
               </div>
@@ -146,10 +133,7 @@ const Listings = () => {
           <div className="listings-grid">
             {normalListings.map((listing) => (
               <div key={listing.id} className="listing-card">
-                <ImageSlider
-                  images={listing.images}
-                  title={listing.title}
-                />
+                <ImageSlider images={listing.images} title={listing.title} />
 
                 <div className="listing-info">
                   <h3>{listing.title}</h3>
@@ -162,10 +146,7 @@ const Listings = () => {
                     KES {listing.price_per_night} / night
                   </p>
 
-                  <a
-                    href={`/listing/${listing.id}`}
-                    className="btn-primary"
-                  >
+                  <a href={`/listing/${listing.id}`} className="btn-primary">
                     View Details
                   </a>
                 </div>
