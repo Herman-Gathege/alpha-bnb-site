@@ -9,9 +9,24 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 def fix_postgres_url(url):
-    """Render/Heroku provide postgres:// which SQLAlchemy rejects"""
-    if url and url.startswith("postgres://"):
-        return url.replace("postgres://", "postgresql://", 1)
+    """
+    Render/Heroku provide postgres:// which SQLAlchemy rejects.
+    Render Postgres ALSO requires SSL connections.
+    """
+    if not url:
+        return url
+
+    # Fix deprecated prefix
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+
+    # Force SSL for Render Postgres
+    if "sslmode=" not in url:
+        if "?" in url:
+            url += "&sslmode=require"
+        else:
+            url += "?sslmode=require"
+
     return url
 
 
