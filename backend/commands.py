@@ -1,30 +1,32 @@
 from flask.cli import with_appcontext
 import click
-from backend.extensions import db, bcrypt
+from backend.extensions import db
 from backend.modules.auth.models import User
 
-
 @click.command(name="create-admin")
-@click.option("--name", prompt="Admin name")
-@click.option("--email", prompt="Admin email")
-@click.option("--password", prompt=True, hide_input=True, confirmation_prompt=True)
 @with_appcontext
-def create_admin(name, email, password):
-    """Create an admin user"""
+def create_admin():
+    """Create default admin user"""
 
-    existing = User.query.filter_by(email=email).first()
+    ADMIN_NAME = "Remington Admin"
+    ADMIN_EMAIL = "admin@alphabnb.com"
+    ADMIN_PASSWORD = "Admin@12345"
+
+    existing = User.query.filter_by(email=ADMIN_EMAIL).first()
     if existing:
-        print("Admin already exists with that email.")
+        print("✅ Admin already exists.")
         return
 
     admin = User(
-        name=name,
-        email=email,
+        name=ADMIN_NAME,
+        email=ADMIN_EMAIL,
         role="admin"
     )
-    admin.set_password(password)
+    admin.set_password(ADMIN_PASSWORD)
 
     db.session.add(admin)
     db.session.commit()
 
-    print("Admin created successfully!")
+    print("🎉 Default admin created!")
+    print("Email:", ADMIN_EMAIL)
+    print("Password:", ADMIN_PASSWORD)
