@@ -338,6 +338,27 @@ section p {
   place-items: center;
 }
 
+/* fix tall track / big vertical gap */
+.slick-list {
+  margin: 0 -14px; /* matches slide padding */
+}
+
+.slick-track {
+  display: flex !important;
+  align-items: stretch !important; /* key fix */
+  margin-bottom:  20px; /* matches slide padding */
+}
+
+/* make every slide fill the track height */
+.slick-slide {
+  height: inherit !important;
+}
+
+/* make the slide div stretch */
+.slick-slide > div {
+  height: 100%;
+}
+
 /* Titles */
 .process-card h3 {
   margin-bottom: 0.75rem;
@@ -463,60 +484,112 @@ html, body {
   background: #f2f2f2;
 }
 
+/* =========================
+   AIRBNB STYLE REVIEWS
+========================= */
+
 .reviews {
-  padding: 4rem 2rem;
-  background: #f9f9f9;
-  text-align: center;
-}
-
-.reviews .section-header h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.reviews .section-header p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 2rem;
-}
-
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-}
-
-.review-card {
+  padding: 5rem 1.5rem;
   background: #fff;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  text-align: left;
-  transition: transform 0.2s;
-  cursor: pointer;
-  
+}
+
+.reviews-slider {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* slick spacing fix */
+.slick-slide {
+  padding: 0 14px;
+}
+
+/* CARD */
+.review-card {
+  position: relative;
+  background: #fff;
+  padding: 2.8rem 2.4rem 2.2rem;
+  border-radius: 22px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+  min-height: 280px;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform .35s ease, box-shadow .35s ease;
 }
 
 .review-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.12);
 }
 
-.review-header {
+/* BIG QUOTE MARK */
+.review-quote {
+  position: absolute;
+  top: 14px;
+  left: 22px;
+  font-size: 70px;
+  color: rgba(177, 15, 58, 0.253);
+  font-family: serif;
+  line-height: 1;
+}
+
+/* REVIEW TEXT */
+.review-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #222;
+  margin-top: 22px;
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+/* FOOTER */
+.review-footer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #333;
+  gap: 14px;
 }
 
+/* Avatar circle */
+.review-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #B10F3A;
+  color: #fff;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* meta block */
+.review-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.review-meta strong {
+  font-size: 0.95rem;
+  color: #111;
+}
+
+.review-meta span {
+  font-size: 0.82rem;
+  color: #777;
+  margin-top: 2px;
+}
+
+/* stars */
 .rating {
   display: flex;
+  gap: 3px;
+  margin-top: 6px;
 }
 
-.review-text {
-  font-size: 0.95rem;
-  color: #555;
-  line-height: 1.5;
+.rating svg {
+  color: #ff385c; /* Airbnb pink */
+  font-size: 14px;
 }

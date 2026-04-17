@@ -111,21 +111,30 @@ const ReviewsSection = () => {
     <section className="reviews" id="reviews">
       <div className="section-header">
         <h2>Guest Reviews</h2>
-        <p>What our guests are saying about the Bungoma apartment</p>
+        <p style={{ textAlign: "center" }}>What our guests are saying about the Bungoma apartment</p>
       </div>
 
       <Slider {...settings} className="reviews-slider">
         {reviews.map((rev, idx) => (
           <div className="review-card" key={idx}>
-            <div className="review-header">
-              <strong>{rev.guest}</strong> · {rev.date}
-              <div className="rating">
-                {Array.from({ length: rev.rating }).map((_, i) => (
-                  <FaStar key={i} color="#f5b50a" />
-                ))}
+            <div className="review-quote">“</div>
+
+            <p className="review-text">{rev.text}</p>
+
+            <div className="review-footer">
+              <div className="review-avatar">{rev.guest.charAt(0)}</div>
+
+              <div className="review-meta">
+                <strong>{rev.guest}</strong>
+                <span>{rev.date}</span>
+
+                <div className="rating">
+                  {Array.from({ length: rev.rating }).map((_, i) => (
+                    <FaStar key={i} />
+                  ))}
+                </div>
               </div>
             </div>
-            <p className="review-text">{rev.text}</p>
           </div>
         ))}
       </Slider>
