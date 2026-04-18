@@ -88,7 +88,8 @@ const Login = () => {
         {/* 👉 We will build this page next */}
         <p style={styles.register}>
           Don’t have an account?{" "}
-          <span onClick={() => navigate(`/register?redirect=${redirectTo}`)}>
+          <span style={styles.link} onClick={() => navigate(`/register?redirect=${redirectTo}`)}>
+            
             Create one
           </span>
         </p>
@@ -98,6 +99,10 @@ const Login = () => {
 };
 
 const styles = {
+  link: {
+    color: "#B10F3A",
+    cursor: "pointer",
+  },
   page: {
     minHeight: "100vh",
     background: "linear-gradient(135deg, #f8fafc, #eef2ff)",

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import "../css/Navbar.css";
-
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [user, setUser] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,10 +44,24 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, [location.pathname]);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   const navLinkClass = (id) =>
     `nav-links ${activeSection === id ? "active" : ""}`;
 
   const isActiveRoute = (path) => location.pathname === path;
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/");
+  };
 
   return (
     <nav className="navbar">
@@ -61,7 +76,11 @@ const Navbar = () => {
           <span className="navbar-logo-text">MySpaceByAlphaOne</span>
         </Link>
 
-        <div className="menu-icon" style={{marginTop: "20px"}} onClick={toggleMenu}>
+        <div
+          className="menu-icon"
+          style={{ marginTop: "20px" }}
+          onClick={toggleMenu}
+        >
           {isOpen ? <FaTimes /> : <FaBars />}
         </div>
 
@@ -135,6 +154,49 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
+
+        {/* AUTH AREA */}
+        <div className="nav-auth">
+          {user ? (
+            <div className="avatar-wrapper">
+              <div
+                className="avatar"
+                onClick={() => setShowDropdown(!showDropdown)}
+              >
+                {user.name ? (
+                  user.name.charAt(0).toUpperCase()
+                ) : (
+                  <FaUserCircle />
+                )}
+              </div>
+
+              {showDropdown && (
+                <div className="avatar-dropdown">
+                  <p className="avatar-name">{user.name}</p>
+
+                  {user.role === "admin" ? (
+                    <Link to="/admin" onClick={() => setShowDropdown(false)}>
+                      Admin Dashboard
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setShowDropdown(false)}
+                    >
+                      Dashboard
+                    </Link>
+                  )}
+
+                  <button onClick={handleLogout}>Logout</button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link to="/login" className="login-btn">
+              Login
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );

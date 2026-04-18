@@ -34,7 +34,6 @@ const Register = () => {
 
       // 3️⃣ Return to previous page (listing booking)
       navigate(redirectTo);
-
     } catch (err) {
       setError("Unable to register. Try another email.");
     }
@@ -56,7 +55,7 @@ const Register = () => {
               type="text"
               placeholder="John Doe"
               value={name}
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               required
               style={styles.input}
             />
@@ -68,7 +67,7 @@ const Register = () => {
               type="email"
               placeholder="you@email.com"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
               required
               style={styles.input}
             />
@@ -80,7 +79,7 @@ const Register = () => {
               type="password"
               placeholder="••••••••"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
               required
               style={styles.input}
             />
@@ -91,9 +90,12 @@ const Register = () => {
           </button>
         </form>
 
-        <p style={styles.login}>
+        <p style={styles.register}>
           Already have an account?{" "}
-          <span onClick={()=>navigate(`/login?redirect=${redirectTo}`)}>
+          <span
+            style={styles.link}
+            onClick={() => navigate(`/login?redirect=${redirectTo}`)}
+          >
             Login
           </span>
         </p>
@@ -103,18 +105,68 @@ const Register = () => {
 };
 
 const styles = {
-  page:{minHeight:"100vh",background:"linear-gradient(135deg,#f8fafc,#eef2ff)",display:"flex",alignItems:"center",justifyContent:"center",padding:"20px"},
-  card:{width:"100%",maxWidth:"420px",background:"#fff",borderRadius:"14px",padding:"32px",boxShadow:"0 20px 40px rgba(0,0,0,.08)"},
-  brand:{fontSize:"20px",fontWeight:"700",color:"#B10F3A",textAlign:"center",marginBottom:"8px"},
-  title:{fontSize:"22px",fontWeight:"600",textAlign:"center"},
-  subtitle:{fontSize:"14px",color:"#6b7280",textAlign:"center",marginBottom:"24px"},
-  error:{background:"#fee2e2",color:"#991b1b",padding:"10px",borderRadius:"8px",marginBottom:"16px",textAlign:"center"},
-  form:{display:"flex",flexDirection:"column",gap:"16px"},
-  field:{display:"flex",flexDirection:"column",gap:"6px"},
-  label:{fontSize:"13px",fontWeight:"500"},
-  input:{padding:"12px",borderRadius:"8px",border:"1px solid #d1d5db"},
-  button:{marginTop:"8px",padding:"12px",borderRadius:"10px",border:"none",background:"#B10F3A",color:"#fff",fontWeight:"600",cursor:"pointer"},
-  login:{marginTop:"20px",textAlign:"center"}
+  register: {
+    marginTop: "20px",
+    textAlign: "center",
+    fontSize: "14px",
+  },
+  link: {
+    color: "#B10F3A",
+    cursor: "pointer",
+  },
+  page: {
+    minHeight: "100vh",
+    background: "linear-gradient(135deg,#f8fafc,#eef2ff)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "20px",
+  },
+  card: {
+    width: "100%",
+    maxWidth: "420px",
+    background: "#fff",
+    borderRadius: "14px",
+    padding: "32px",
+    boxShadow: "0 20px 40px rgba(0,0,0,.08)",
+  },
+  brand: {
+    fontSize: "20px",
+    fontWeight: "700",
+    color: "#B10F3A",
+    textAlign: "center",
+    marginBottom: "8px",
+  },
+  title: { fontSize: "22px", fontWeight: "600", textAlign: "center" },
+  subtitle: {
+    fontSize: "14px",
+    color: "#6b7280",
+    textAlign: "center",
+    marginBottom: "24px",
+  },
+  error: {
+    background: "#fee2e2",
+    color: "#991b1b",
+    padding: "10px",
+    borderRadius: "8px",
+    marginBottom: "16px",
+    textAlign: "center",
+  },
+  form: { display: "flex", flexDirection: "column", gap: "16px" },
+  field: { display: "flex", flexDirection: "column", gap: "6px" },
+  label: { fontSize: "13px", fontWeight: "500" },
+  input: { padding: "12px", borderRadius: "8px", border: "1px solid #d1d5db" },
+  button: {
+    marginTop: "8px",
+    padding: "12px",
+    borderRadius: "10px",
+    border: "none",
+    background: "#B10F3A",
+    color: "#fff",
+    fontWeight: "600",
+    cursor: "pointer",
+  },
+  login: { marginTop: "20px", textAlign: "center" },
 };
 
 export default Register;
