@@ -18,12 +18,37 @@ const ListingDetails = () => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(1);
+  const [nights, setNights] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
     fetchListing();
   }, []);
+
+  useEffect(() => {
+    if (!checkIn || !checkOut || !listing) return;
+
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+
+    const diffTime = end - start;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays <= 0) {
+      setNights(0);
+      setTotalPrice(0);
+      return;
+    }
+
+    setNights(diffDays);
+
+    const subtotal = diffDays * listing.price_per_night;
+    const total = subtotal + listing.cleaning_fee + listing.service_fee;
+
+    setTotalPrice(total);
+  }, [checkIn, checkOut, listing]);
 
   const fetchListing = async () => {
     try {
@@ -144,6 +169,32 @@ const ListingDetails = () => {
               {error && <p style={{ color: "red" }}>{error}</p>}
               {success && <p style={{ color: "green" }}>{success}</p>}
             </div>
+
+            {nights > 0 && (
+              <div className="price-breakdown">
+                <div className="price-row">
+                  <span>
+                    KES {listing.price_per_night} × {nights} nights
+                  </span>
+                  <span>KES {listing.price_per_night * nights}</span>
+                </div>
+
+                <div className="price-row">
+                  <span>Cleaning fee</span>
+                  <span>KES {listing.cleaning_fee}</span>
+                </div>
+
+                <div className="price-row">
+                  <span>Service fee</span>
+                  <span>KES {listing.service_fee}</span>
+                </div>
+
+                <div className="price-total">
+                  <span>Total</span>
+                  <span>KES {totalPrice}</span>
+                </div>
+              </div>
+            )}
 
             <p className="booking-note">You won’t be charged yet</p>
           </div>

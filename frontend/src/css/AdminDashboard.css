@@ -40,12 +40,12 @@
 
 /* ===== CONTENT AREA ===== */
 
-.content {
-  background: white;
+/* .content {
+  background: rgb(167, 77, 77);
   padding: 28px;
   border-radius: 14px;
   box-shadow: 0 12px 30px rgba(0,0,0,0.06);
-}
+} */
 
 /* ===== HEADINGS ===== */
 
@@ -351,3 +351,126 @@ button:hover {
   font-size: 12px;
   color: gray;
 }
+
+/* ===== BOOKINGS TABLE ===== */
+
+/* prevents dashboard from stretching */
+.table-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* column sizing */
+.admin-table th:nth-child(1) { width: 70px; }   /* ID */
+.admin-table th:nth-child(2) { width: 16%; }    /* Listing */
+.admin-table th:nth-child(3) { width: 16%; }    /* User */
+.admin-table th:nth-child(4) { width: 11%; }    /* Check in */
+.admin-table th:nth-child(5) { width: 11%; }    /* Check out */
+.admin-table th:nth-child(6) { width: 8%; }     /* Guests */
+.admin-table th:nth-child(7) { width: 11%; }    /* Total */
+.admin-table th:nth-child(8) { width: 11%; }    /* Status */
+.admin-table th:nth-child(9) { width: 120px; }  /* Actions */
+
+.admin-table thead {
+  background: #111827;
+  color: white;
+}
+
+
+
+.admin-table th,
+.admin-table td {
+  padding: 9px 10px;   /* tighter rows */
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-table tbody tr {
+  transition: 0.2s ease;
+  
+}
+
+.admin-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+.listing-cell,
+.email-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price-cell {
+  font-weight: 600;
+  color: #111827;
+}
+
+.booking-status {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.booking-status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.booking-status.confirmed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.booking-status.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.booking-status.cancelled {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.actions-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 110px;
+}
+
+.btn-approve {
+  background: #16a34a;
+}
+
+.btn-approve:hover {
+  background: #15803d;
+}
+
+.btn-reject {
+  background: #dc2626;
+}
+
+.btn-reject:hover {
+  background: #b91c1c;
+}
+
+.btn-cancel {
+  background: #6b7280;
+}
+
+.btn-cancel:hover {
+  background: #4b5563;
+}
+

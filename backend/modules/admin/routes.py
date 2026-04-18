@@ -142,6 +142,26 @@ def toggle_listing(listing_id):
     })
 
 # Admin route to get all bookings for management purposes
+# @admin_bp.route("/bookings", methods=["GET"])
+# @admin_required
+# def get_all_bookings():
+#     bookings = Booking.query.order_by(Booking.created_at.desc()).all()
+
+#     results = []
+#     for b in bookings:
+#         results.append({
+#             "id": b.id,
+#             "listing_id": b.listing_id,
+#             "user_id": b.user_id,
+#             "check_in": b.check_in,
+#             "check_out": b.check_out,
+#             "total_price": b.total_price,
+#             "status": b.status,
+#             "created_at": b.created_at
+#         })
+
+#     return jsonify(results), 200
+
 @admin_bp.route("/bookings", methods=["GET"])
 @admin_required
 def get_all_bookings():
@@ -149,15 +169,27 @@ def get_all_bookings():
 
     results = []
     for b in bookings:
+        listing = Listing.query.get(b.listing_id)
+        user = User.query.get(b.user_id)
+
         results.append({
             "id": b.id,
+
+            # 👇 HUMAN FRIENDLY DATA
             "listing_id": b.listing_id,
+            "listing_title": listing.title if listing else "Deleted listing",
+
             "user_id": b.user_id,
-            "check_in": b.check_in,
-            "check_out": b.check_out,
+            "user_email": user.email if user else "Deleted user",
+
+            # 👇 CORRECT FIELD NAMES
+            "check_in_date": b.check_in_date.isoformat(),
+            "check_out_date": b.check_out_date.isoformat(),
+            "guests_count": b.guests_count,
+
             "total_price": b.total_price,
             "status": b.status,
-            "created_at": b.created_at
+            "created_at": b.created_at.isoformat(),
         })
 
     return jsonify(results), 200
@@ -177,8 +209,8 @@ def approve_booking(booking_id):
     # ✅ Create ONE blocked range (correct approach)
     blocked = BlockedDate(
         listing_id=booking.listing_id,
-        start_date=booking.check_in,
-        end_date=booking.check_out,
+        start_date=booking.check_in_date,
+        end_date=booking.check_out_date,
         reason="booking"
     )
     db.session.add(blocked)
@@ -216,8 +248,8 @@ def cancel_booking(booking_id):
     # ✅ remove blocked range correctly
     BlockedDate.query.filter(
         BlockedDate.listing_id == booking.listing_id,
-        BlockedDate.start_date == booking.check_in,
-        BlockedDate.end_date == booking.check_out,
+        BlockedDate.start_date == booking.check_in_date,
+        BlockedDate.end_date == booking.check_out_date,
         BlockedDate.reason == "booking"
     ).delete()
 
