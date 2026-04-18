@@ -3,60 +3,45 @@
 import React from "react";
 import { Outlet, NavLink, Link } from "react-router-dom";
 import TopBar from "../../components/dashboard/TopBar";
+import { dashboardNav } from "../../config/dashboardNav";
 
 const DashboardLayout = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const role = user?.role || "user";
+
+  // pick correct navigation set
+  const navLinks = dashboardNav[role] || dashboardNav.user;
+
   return (
     <div style={styles.wrapper}>
       {/* Sidebar */}
       <aside style={styles.sidebar}>
-        <Link to="/" style={{ textDecoration: "none" , color: "inherit" }}>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
           <h2 style={styles.logo}>MySpace</h2>
         </Link>
 
         <nav style={styles.nav}>
-          <NavLink
-            to="/dashboard"
-            end
-            style={({ isActive }) =>
-              isActive ? styles.activeLink : styles.link
-            }
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            to="/dashboard/leads"
-            style={({ isActive }) =>
-              isActive ? styles.activeLink : styles.link
-            }
-          >
-            Leads
-          </NavLink>
-
-          <NavLink
-            to="/dashboard/ai-readiness"
-            style={({ isActive }) =>
-              isActive ? styles.activeLink : styles.link
-            }
-          >
-            AI Readiness
-          </NavLink>
-
-          <NavLink
-            to="/dashboard/contacts"
-            style={({ isActive }) =>
-              isActive ? styles.activeLink : styles.link
-            }
-          >
-            Contact Messages
-          </NavLink>
+          <nav style={styles.nav}>
+            {navLinks.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                end={item.path === "/dashboard" || item.path === "/admin"}
+                style={({ isActive }) =>
+                  isActive ? styles.activeLink : styles.link
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
         </nav>
       </aside>
 
       {/* Main Area */}
       <div style={styles.main}>
         {/* Top Bar */}
-        <TopBar title="Dashboard" />
+        <TopBar title={role === "admin" ? "Admin Panel" : "Dashboard"} />
 
         {/* Page Content */}
         <main style={styles.content}>
